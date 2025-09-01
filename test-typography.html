@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography Component Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .demo-item {
+            padding: 1rem;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            background: #fafafa;
+        }
+        
+        .demo-item h3 {
+            margin: 0 0 1rem 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #f0f0f0;
+            border-radius: 6px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .control-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .control-group select {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        
+        .test-typography {
+            padding: 1rem;
+            border: 2px dashed #007bff;
+            border-radius: 6px;
+            background: #f8f9ff;
+            margin: 1rem 0;
+        }
+        
+        .event-log {
+            background: #f8f9fa;
+            border: 1px solid #e5e5e5;
+            border-radius: 6px;
+            padding: 1rem;
+            max-height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+        }
+        
+        .event-log h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .event-item {
+            padding: 0.25rem 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .event-item:last-child {
+            border-bottom: none;
+        }
+        
+        .event-time {
+            color: #666;
+            font-size: 0.7rem;
+        }
+        
+        .event-detail {
+            color: #333;
+            margin-left: 0.5rem;
+        }
+        
+        .color-demo {
+            padding: 1rem;
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+        
+        .color-demo.primary {
+            background: #007bff;
+            color: white;
+        }
+        
+        .color-demo.secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .color-demo.muted {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 1px solid #e5e5e5;
+        }
+        
+        .color-demo.inverse {
+            background: #343a40;
+            color: white;
+        }
+        
+        .accessibility-demo {
+            background: #e8f5e8;
+            border: 1px solid #28a745;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .accessibility-demo h4 {
+            margin: 0 0 0.5rem 0;
+            color: #155724;
+            font-size: 1rem;
+        }
+        
+        .accessibility-demo p {
+            margin: 0;
+            color: #155724;
+            font-size: 0.9rem;
+        }
+        
+        .print-demo {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .print-demo h4 {
+            margin: 0 0 0.5rem 0;
+            color: #856404;
+            font-size: 1rem;
+        }
+        
+        .print-demo p {
+            margin: 0;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+        
+        @media print {
+            .controls,
+            .event-log,
+            .section h2 {
+                display: none;
+            }
+            
+            .container {
+                box-shadow: none;
+                border: 1px solid #000;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        @media (prefers-contrast: high) {
+            .demo-item {
+                border-width: 2px;
+            }
+            
+            .test-typography {
+                border-width: 3px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Typography Component Test Page</h1>
+        <p>This page provides comprehensive testing for the Typography component with interactive controls and real-world examples.</p>
+        
+        <!-- Interactive Controls -->
+        <div class="section">
+            <h2>Interactive Controls</h2>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="variant">Variant:</label>
+                    <select id="variant">
+                        <option value="heading-1">Heading 1</option>
+                        <option value="heading-2">Heading 2</option>
+                        <option value="heading-3">Heading 3</option>
+                        <option value="heading-4">Heading 4</option>
+                        <option value="heading-5">Heading 5</option>
+                        <option value="heading-6">Heading 6</option>
+                        <option value="body" selected>Body</option>
+                        <option value="caption">Caption</option>
+                        <option value="label">Label</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="size">Size:</label>
+                    <select id="size">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                        <option value="xlarge">Extra Large</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="weight">Weight:</label>
+                    <select id="weight">
+                        <option value="light">Light</option>
+                        <option value="normal" selected>Normal</option>
+                        <option value="medium">Medium</option>
+                        <option value="semibold">Semibold</option>
+                        <option value="bold">Bold</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="color">Color:</label>
+                    <select id="color">
+                        <option value="primary" selected>Primary</option>
+                        <option value="secondary">Secondary</option>
+                        <option value="muted">Muted</option>
+                        <option value="inverse">Inverse</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="as">Element:</label>
+                    <select id="as">
+                        <option value="">Default</option>
+                        <option value="div">div</option>
+                        <option value="span">span</option>
+                        <option value="article">article</option>
+                        <option value="section">section</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="test-typography">
+                <ds-typography id="test-typography" variant="body" size="medium" weight="normal" color="primary">
+                    This is a test typography component. Change the controls above to see how it updates.
+                </ds-typography>
+            </div>
+            
+            <div class="event-log">
+                <h4>Event Log</h4>
+                <div id="event-log-content">
+                    <div class="event-item">
+                        <span class="event-time">Ready</span>
+                        <span class="event-detail">Typography component loaded</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Variants Demo -->
+        <div class="section">
+            <h2>Typography Variants</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>Headings</h3>
+                    <ds-typography variant="heading-1">Heading 1</ds-typography>
+                    <ds-typography variant="heading-2">Heading 2</ds-typography>
+                    <ds-typography variant="heading-3">Heading 3</ds-typography>
+                    <ds-typography variant="heading-4">Heading 4</ds-typography>
+                    <ds-typography variant="heading-5">Heading 5</ds-typography>
+                    <ds-typography variant="heading-6">Heading 6</ds-typography>
+                </div>
+                
+                <div class="demo-item">
+                    <h3>Body & Text</h3>
+                    <ds-typography variant="body">Body text - Regular paragraph content for reading and comprehension.</ds-typography>
+                    <ds-typography variant="caption">Caption text - Small descriptive text for additional context.</ds-typography>
+                    <ds-typography variant="label">Label text - Form field labels and UI element descriptions.</ds-typography>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sizes Demo -->
+        <div class="section">
+            <h2>Typography Sizes</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>Size Variants</h3>
+                    <ds-typography variant="body" size="small">Small text (12px) - Perfect for captions and fine print</ds-typography>
+                    <ds-typography variant="body" size="medium">Medium text (16px) - Standard body text size</ds-typography>
+                    <ds-typography variant="body" size="large">Large text (18px) - Enhanced readability for important content</ds-typography>
+                    <ds-typography variant="body" size="xlarge">Extra large text (20px) - Prominent text for emphasis</ds-typography>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Weights Demo -->
+        <div class="section">
+            <h2>Typography Weights</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>Weight Variants</h3>
+                    <ds-typography variant="body" weight="light">Light weight text - Subtle and elegant</ds-typography>
+                    <ds-typography variant="body" weight="normal">Normal weight text - Standard readability</ds-typography>
+                    <ds-typography variant="body" weight="medium">Medium weight text - Slightly emphasized</ds-typography>
+                    <ds-typography variant="body" weight="semibold">Semibold weight text - Clearly emphasized</ds-typography>
+                    <ds-typography variant="body" weight="bold">Bold weight text - Strong emphasis</ds-typography>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Colors Demo -->
+        <div class="section">
+            <h2>Typography Colors</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>Color Variants</h3>
+                    <div class="color-demo primary">
+                        <ds-typography variant="body" color="inverse">Primary background with inverse text</ds-typography>
+                    </div>
+                    <div class="color-demo secondary">
+                        <ds-typography variant="body" color="inverse">Secondary background with inverse text</ds-typography>
+                    </div>
+                    <div class="color-demo muted">
+                        <ds-typography variant="body" color="muted">Muted background with muted text</ds-typography>
+                    </div>
+                    <div class="color-demo inverse">
+                        <ds-typography variant="body" color="inverse">Dark background with inverse text</ds-typography>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Accessibility Demo -->
+        <div class="section">
+            <h2>Accessibility Features</h2>
+            <div class="accessibility-demo">
+                <h4>Screen Reader Support</h4>
+                <p>All typography components include proper ARIA attributes and semantic HTML elements for screen reader compatibility.</p>
+            </div>
+            
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>ARIA Labels</h3>
+                    <ds-typography variant="heading-1" aria-label="Main page title">Accessible Heading</ds-typography>
+                    <ds-typography variant="body" aria-describedby="description">Text with description</ds-typography>
+                    <ds-typography id="description" variant="caption" color="muted">This text describes the content above</ds-typography>
+                </div>
+                
+                <div class="demo-item">
+                    <h3>Semantic Elements</h3>
+                    <ds-typography variant="heading-1">H1 Element</ds-typography>
+                    <ds-typography variant="heading-2">H2 Element</ds-typography>
+                    <ds-typography variant="body">P Element</ds-typography>
+                    <ds-typography variant="label">Label Element</ds-typography>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Custom Elements Demo -->
+        <div class="section">
+            <h2>Custom Elements</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>Element Override</h3>
+                    <p>Using the <code>as</code> property to override semantic elements:</p>
+                    <ds-typography variant="heading-1" as="div">H1 style as div</ds-typography>
+                    <ds-typography variant="heading-2" as="span">H2 style as span</ds-typography>
+                    <ds-typography variant="body" as="article">Body style as article</ds-typography>
+                    <ds-typography variant="caption" as="time">Caption style as time</ds-typography>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Real-world Examples -->
+        <div class="section">
+            <h2>Real-world Examples</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <h3>Article Layout</h3>
+                    <article>
+                        <ds-typography variant="heading-1" size="xlarge" weight="bold">Article Title</ds-typography>
+                        <ds-typography variant="body" color="muted" size="small">Published on March 15, 2024 • 5 min read</ds-typography>
+                        <ds-typography variant="body" size="large" style="margin-top: 1rem;">This is the article introduction that provides context and sets expectations for the content that follows.</ds-typography>
+                        <ds-typography variant="heading-2" style="margin-top: 1.5rem;">Section Heading</ds-typography>
+                        <ds-typography variant="body">This is the main content of the article section, providing detailed information and insights on the topic.</ds-typography>
+                    </article>
+                </div>
+                
+                <div class="demo-item">
+                    <h3>Card Component</h3>
+                    <div style="border: 1px solid #e5e5e5; border-radius: 8px; padding: 1.5rem;">
+                        <ds-typography variant="heading-3" weight="semibold">Product Name</ds-typography>
+                        <ds-typography variant="body" color="secondary" style="margin: 0.5rem 0;">High-quality product description that explains the key features and benefits.</ds-typography>
+                        <ds-typography variant="heading-4" color="primary" weight="bold">$99.99</ds-typography>
+                        <ds-typography variant="caption" color="muted">Free shipping on orders over $50</ds-typography>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Print Demo -->
+        <div class="section">
+            <h2>Print Styles</h2>
+            <div class="print-demo">
+                <h4>Print Optimization</h4>
+                <p>Typography components include print-specific styles for optimal printing. Try printing this page to see the print styles in action.</p>
+            </div>
+            
+            <div class="demo-item">
+                <h3>Print-friendly Content</h3>
+                <ds-typography variant="heading-1">Print Heading</ds-typography>
+                <ds-typography variant="body">This content is optimized for printing with proper contrast and readability.</ds-typography>
+                <ds-typography variant="caption">Print caption text</ds-typography>
+            </div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { Typography } from './dist/design-system.esm.js';
+        
+        // Register the component
+        customElements.define('ds-typography', Typography);
+        
+        // Get references to controls and test element
+        const variantSelect = document.getElementById('variant');
+        const sizeSelect = document.getElementById('size');
+        const weightSelect = document.getElementById('weight');
+        const colorSelect = document.getElementById('color');
+        const asSelect = document.getElementById('as');
+        const testTypography = document.getElementById('test-typography');
+        const eventLog = document.getElementById('event-log-content');
+        
+        // Function to log events
+        function logEvent(message, detail = '') {
+            const eventItem = document.createElement('div');
+            eventItem.className = 'event-item';
+            
+            const time = new Date().toLocaleTimeString();
+            eventItem.innerHTML = `
+                <span class="event-time">${time}</span>
+                <span class="event-detail">${message} ${detail}</span>
+            `;
+            
+            eventLog.insertBefore(eventItem, eventLog.firstChild);
+            
+            // Keep only last 10 events
+            while (eventLog.children.length > 11) {
+                eventLog.removeChild(eventLog.lastChild);
+            }
+        }
+        
+        // Function to update test typography
+        function updateTestTypography() {
+            const variant = variantSelect.value;
+            const size = sizeSelect.value;
+            const weight = weightSelect.value;
+            const color = colorSelect.value;
+            const as = asSelect.value;
+            
+            testTypography.setAttribute('variant', variant);
+            testTypography.setAttribute('size', size);
+            testTypography.setAttribute('weight', weight);
+            testTypography.setAttribute('color', color);
+            
+            if (as) {
+                testTypography.setAttribute('as', as);
+            } else {
+                testTypography.removeAttribute('as');
+            }
+            
+            logEvent(`Updated typography:`, `${variant}, ${size}, ${weight}, ${color}${as ? `, as=${as}` : ''}`);
+        }
+        
+        // Add event listeners
+        variantSelect.addEventListener('change', updateTestTypography);
+        sizeSelect.addEventListener('change', updateTestTypography);
+        weightSelect.addEventListener('change', updateTestTypography);
+        colorSelect.addEventListener('change', updateTestTypography);
+        asSelect.addEventListener('change', updateTestTypography);
+        
+        // Listen for typography render events
+        document.addEventListener('ds-typography-render', (event) => {
+            logEvent(`Typography rendered:`, `${event.detail.data.variant} variant`);
+        });
+        
+        // Initial log
+        logEvent('Typography component test page loaded');
+        
+        // Test keyboard navigation
+        document.addEventListener('keydown', (event) => {
+            if (event.ctrlKey || event.metaKey) {
+                switch (event.key) {
+                    case '1':
+                        variantSelect.value = 'heading-1';
+                        updateTestTypography();
+                        event.preventDefault();
+                        break;
+                    case '2':
+                        variantSelect.value = 'heading-2';
+                        updateTestTypography();
+                        event.preventDefault();
+                        break;
+                    case '3':
+                        variantSelect.value = 'heading-3';
+                        updateTestTypography();
+                        event.preventDefault();
+                        break;
+                    case 'b':
+                        variantSelect.value = 'body';
+                        updateTestTypography();
+                        event.preventDefault();
+                        break;
+                    case 'c':
+                        variantSelect.value = 'caption';
+                        updateTestTypography();
+                        event.preventDefault();
+                        break;
+                    case 'l':
+                        variantSelect.value = 'label';
+                        updateTestTypography();
+                        event.preventDefault();
+                        break;
+                }
+            }
+        });
+        
+        // Log keyboard shortcuts
+        logEvent('Keyboard shortcuts:', 'Ctrl+1-3 for headings, Ctrl+B for body, Ctrl+C for caption, Ctrl+L for label');
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Component Test</title>
+    <link rel="stylesheet" href="dist/design-system.css" />
+    <style>
+      body {
+        font-family: var(--font-family-sans);
+        padding: 2rem;
+        background: var(--color-background);
+        color: var(--color-text-primary);
+      }
+      .test-section {
+        margin: 2rem 0;
+        padding: 1rem;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-md);
+      }
+      .button-group {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 1rem 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Button Component Test</h1>
+
+    <div class="test-section">
+      <h2>Button Variants</h2>
+      <div class="button-group">
+        <ds-button variant="primary">Primary</ds-button>
+        <ds-button variant="secondary">Secondary</ds-button>
+        <ds-button variant="outline">Outline</ds-button>
+        <ds-button variant="ghost">Ghost</ds-button>
+        <ds-button variant="link">Link</ds-button>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Button Sizes</h2>
+      <div class="button-group">
+        <ds-button variant="primary" size="small">Small</ds-button>
+        <ds-button variant="primary" size="medium">Medium</ds-button>
+        <ds-button variant="primary" size="large">Large</ds-button>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Button States</h2>
+      <div class="button-group">
+        <ds-button variant="primary">Default</ds-button>
+        <ds-button variant="primary" disabled>Disabled</ds-button>
+        <ds-button variant="primary" loading>Loading</ds-button>
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Link Buttons</h2>
+      <div class="button-group">
+        <ds-button variant="primary" href="/test">Internal Link</ds-button>
+        <ds-button variant="outline" href="https://example.com" target="_blank"
+          >External Link</ds-button
+        >
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Event Testing</h2>
+      <div class="button-group">
+        <ds-button variant="primary" id="test-button">Click Me</ds-button>
+      </div>
+      <div
+        id="event-log"
+        style="
+          margin-top: 1rem;
+          padding: 1rem;
+          background: var(--color-gray-100);
+          border-radius: var(--border-radius-md);
+          font-family: var(--font-family-mono);
+          font-size: var(--font-size-2);
+        "
+      >
+        <strong>Event Log:</strong><br />
+      </div>
+    </div>
+
+    <script type="module">
+      import { Button } from './dist/design-system.esm.js';
+
+      // Test event handling
+      const testButton = document.getElementById('test-button');
+      const eventLog = document.getElementById('event-log');
+
+      if (testButton) {
+        testButton.addEventListener('ds-button-click', e => {
+          eventLog.innerHTML += `Click event: ${JSON.stringify(
+            e.detail,
+            null,
+            2
+          )}<br>`;
+        });
+
+        testButton.addEventListener('ds-button-focus', e => {
+          eventLog.innerHTML += `Focus event: ${JSON.stringify(
+            e.detail,
+            null,
+            2
+          )}<br>`;
+        });
+
+        testButton.addEventListener('ds-button-blur', e => {
+          eventLog.innerHTML += `Blur event: ${JSON.stringify(
+            e.detail,
+            null,
+            2
+          )}<br>`;
+        });
+      }
+    </script>
+  </body>
+</html>

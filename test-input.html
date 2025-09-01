@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input Component Test</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 2rem;
+        background-color: #f9fafb;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #1f2937;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      h2 {
+        color: #374151;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 0.5rem;
+      }
+
+      .section {
+        margin-bottom: 2rem;
+      }
+
+      .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .input-row {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .input-row > * {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      label {
+        font-weight: 500;
+        color: #374151;
+        margin-bottom: 0.25rem;
+      }
+
+      .description {
+        font-size: 0.875rem;
+        color: #6b7280;
+        margin-top: 0.25rem;
+      }
+
+      .event-log {
+        background: #f3f4f6;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        padding: 1rem;
+        font-family: 'Monaco', 'Menlo', monospace;
+        font-size: 0.875rem;
+        max-height: 200px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+      }
+
+      .clear-log {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        margin-top: 0.5rem;
+      }
+
+      .clear-log:hover {
+        background: #dc2626;
+      }
+
+      .form-example {
+        background: #f9fafb;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
+        padding: 1.5rem;
+        margin-top: 1rem;
+      }
+
+      .form-example button {
+        background: #3b82f6;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.375rem;
+        cursor: pointer;
+        font-weight: 500;
+        margin-top: 1rem;
+      }
+
+      .form-example button:hover {
+        background: #2563eb;
+      }
+
+      .form-example button:disabled {
+        background: #9ca3af;
+        cursor: not-allowed;
+      }
+
+      .accessibility-demo {
+        background: #fef3c7;
+        border: 1px solid #f59e0b;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        margin-top: 1rem;
+      }
+
+      .accessibility-demo h3 {
+        color: #92400e;
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Input Component Test Page</h1>
+
+      <div class="section">
+        <h2>Basic Input Types</h2>
+        <div class="input-group">
+          <label for="text-input">Text Input</label>
+          <ds-input
+            id="text-input"
+            type="text"
+            placeholder="Enter some text"
+          ></ds-input>
+        </div>
+
+        <div class="input-group">
+          <label for="email-input">Email Input</label>
+          <ds-input
+            id="email-input"
+            type="email"
+            placeholder="Enter your email"
+          ></ds-input>
+        </div>
+
+        <div class="input-group">
+          <label for="password-input">Password Input</label>
+          <ds-input
+            id="password-input"
+            type="password"
+            placeholder="Enter your password"
+          ></ds-input>
+        </div>
+
+        <div class="input-group">
+          <label for="number-input">Number Input</label>
+          <ds-input
+            id="number-input"
+            type="number"
+            placeholder="Enter a number"
+            min="0"
+            max="100"
+            step="1"
+          ></ds-input>
+        </div>
+
+        <div class="input-group">
+          <label for="tel-input">Phone Input</label>
+          <ds-input
+            id="tel-input"
+            type="tel"
+            placeholder="Enter phone number"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          ></ds-input>
+        </div>
+
+        <div class="input-group">
+          <label for="url-input">URL Input</label>
+          <ds-input
+            id="url-input"
+            type="url"
+            placeholder="Enter a URL"
+          ></ds-input>
+        </div>
+
+        <div class="input-group">
+          <label for="search-input">Search Input</label>
+          <ds-input
+            id="search-input"
+            type="search"
+            placeholder="Search..."
+          ></ds-input>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Input Sizes</h2>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Small</label>
+            <ds-input size="small" placeholder="Small input"></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Medium</label>
+            <ds-input size="medium" placeholder="Medium input"></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Large</label>
+            <ds-input size="large" placeholder="Large input"></ds-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Input States</h2>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Normal</label>
+            <ds-input placeholder="Normal state"></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Disabled</label>
+            <ds-input disabled placeholder="Disabled state"></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Readonly</label>
+            <ds-input
+              readonly
+              value="Readonly value"
+              placeholder="Readonly state"
+            ></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Required</label>
+            <ds-input required placeholder="Required field"></ds-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Validation States</h2>
+        <div class="input-row">
+          <div class="input-group">
+            <label>Default</label>
+            <ds-input placeholder="Default state"></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Error</label>
+            <ds-input
+              validation-state="error"
+              error-message="This field is required"
+              placeholder="Error state"
+            ></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Success</label>
+            <ds-input
+              validation-state="success"
+              success-message="Input is valid"
+              placeholder="Success state"
+            ></ds-input>
+          </div>
+          <div class="input-group">
+            <label>Warning</label>
+            <ds-input
+              validation-state="warning"
+              warning-message="Please double-check"
+              placeholder="Warning state"
+            ></ds-input>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Character Count</h2>
+        <div class="input-group">
+          <label for="char-count-input">With Character Limit</label>
+          <ds-input
+            id="char-count-input"
+            max-length="50"
+            placeholder="Enter up to 50 characters"
+          ></ds-input>
+          <div class="description">
+            This input has a 50 character limit with visual feedback.
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Interactive Demo</h2>
+        <div class="input-group">
+          <label for="interactive-input">Interactive Input</label>
+          <ds-input
+            id="interactive-input"
+            type="email"
+            placeholder="Type to see events"
+            required
+          ></ds-input>
+          <div class="description">
+            This input logs all events below. Try typing, focusing, and
+            blurring.
+          </div>
+        </div>
+
+        <h3>Event Log</h3>
+        <div id="event-log" class="event-log">Events will appear here...\n</div>
+        <button class="clear-log" onclick="clearEventLog()">Clear Log</button>
+      </div>
+
+      <div class="section">
+        <h2>Form Integration</h2>
+        <div class="form-example">
+          <h3>Contact Form</h3>
+          <form id="contact-form">
+            <div class="input-group">
+              <label for="form-name">Name *</label>
+              <ds-input
+                id="form-name"
+                name="name"
+                type="text"
+                placeholder="Your full name"
+                required
+              ></ds-input>
+            </div>
+
+            <div class="input-group">
+              <label for="form-email">Email *</label>
+              <ds-input
+                id="form-email"
+                name="email"
+                type="email"
+                placeholder="your@email.com"
+                required
+              ></ds-input>
+            </div>
+
+            <div class="input-group">
+              <label for="form-phone">Phone</label>
+              <ds-input
+                id="form-phone"
+                name="phone"
+                type="tel"
+                placeholder="123-456-7890"
+                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+              ></ds-input>
+            </div>
+
+            <div class="input-group">
+              <label for="form-age">Age</label>
+              <ds-input
+                id="form-age"
+                name="age"
+                type="number"
+                placeholder="Your age"
+                min="0"
+                max="120"
+              ></ds-input>
+            </div>
+
+            <button type="submit">Submit Form</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Accessibility Demo</h2>
+        <div class="accessibility-demo">
+          <h3>Screen Reader Friendly</h3>
+          <div class="input-group">
+            <label for="accessible-email">Email Address *</label>
+            <ds-input
+              id="accessible-email"
+              type="email"
+              placeholder="Enter your email address"
+              aria-describedby="email-help"
+              required
+            ></ds-input>
+            <div id="email-help" class="description">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+
+          <div class="input-group">
+            <label for="accessible-password">Password *</label>
+            <ds-input
+              id="accessible-password"
+              type="password"
+              placeholder="Enter your password"
+              validation-state="error"
+              error-message="Password must be at least 8 characters long"
+              aria-describedby="password-help"
+              min-length="8"
+              required
+            ></ds-input>
+            <div id="password-help" class="description">
+              Password must contain at least 8 characters.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Input } from './dist/design-system.esm.js';
+
+      // Event logging functionality
+      let eventLog = document.getElementById('event-log');
+
+      function logEvent(message) {
+        const time = new Date().toLocaleTimeString();
+        eventLog.textContent += `[${time}] ${message}\n`;
+        eventLog.scrollTop = eventLog.scrollHeight;
+      }
+
+      window.clearEventLog = function () {
+        eventLog.textContent = 'Events will appear here...\n';
+      };
+
+      // Set up event listeners for interactive demo
+      const interactiveInput = document.getElementById('interactive-input');
+
+      interactiveInput.addEventListener('ds-input-change', e => {
+        logEvent(`Change: "${e.detail.data.value}"`);
+      });
+
+      interactiveInput.addEventListener('ds-input-focus', () => {
+        logEvent('Focus');
+      });
+
+      interactiveInput.addEventListener('ds-input-blur', () => {
+        logEvent('Blur');
+      });
+
+      interactiveInput.addEventListener('ds-input-validate', e => {
+        logEvent(
+          `Validate: ${e.detail.data.validationState} (${
+            e.detail.data.isValid ? 'valid' : 'invalid'
+          })`
+        );
+      });
+
+      // Form submission handling
+      const contactForm = document.getElementById('contact-form');
+      contactForm.addEventListener('submit', e => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData.entries());
+
+        logEvent(`Form submitted: ${JSON.stringify(data)}`);
+
+        // Reset form
+        contactForm.reset();
+      });
+
+      // Character count demo
+      const charCountInput = document.getElementById('char-count-input');
+      charCountInput.addEventListener('ds-input-change', e => {
+        const length = e.detail.data.value.length;
+        const maxLength = 50;
+
+        if (length > maxLength) {
+          logEvent(`Character count exceeded: ${length}/${maxLength}`);
+        }
+      });
+
+      // Validation demo
+      const accessiblePassword = document.getElementById('accessible-password');
+      accessiblePassword.addEventListener('ds-input-validate', e => {
+        if (e.detail.data.validationState === 'error') {
+          logEvent(`Validation error: ${e.detail.data.validationMessage}`);
+        } else if (e.detail.data.validationState === 'success') {
+          logEvent('Password validation passed');
+        }
+      });
+
+      // Initialize logging
+      logEvent('Input component test page loaded');
+      logEvent('Try interacting with the inputs above to see events');
+    </script>
+  </body>
+</html>

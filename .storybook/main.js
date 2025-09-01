@@ -2,7 +2,12 @@
 const config = {
   stories: ['../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
-    '@storybook/addon-essentials',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        docs: false,
+      },
+    },
     '@storybook/addon-a11y',
     '@storybook/addon-themes',
   ],
@@ -10,9 +15,7 @@ const config = {
     name: '@storybook/web-components-vite',
     options: {},
   },
-  docs: {
-    autodocs: 'tag',
-  },
+
   viteFinal: async config => {
     // Add SCSS support
     config.css = {

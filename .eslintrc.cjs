@@ -47,6 +47,7 @@ module.exports = {
       rules: {
         '@typescript-eslint/no-explicit-any': 'off',
         'no-console': 'off',
+        'no-unused-expressions': 'off',
       },
     },
     {

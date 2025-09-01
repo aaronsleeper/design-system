@@ -2,8 +2,8 @@
 // This file exports all web components for the design system
 
 // Form Components
-export * from './form/button-primary.js';
-export * from './form/input-text.js';
+export * from './form/button.js';
+export * from './form/input.js';
 export * from './form/select.js';
 export * from './form/checkbox.js';
 export * from './form/radio.js';

@@ -5,7 +5,7 @@
 Lit-based web component design system with TypeScript, SCSS, and Storybook integration.
 
 **Current Phase**: Phase 4 - Component Architecture Validation
-**Next Task**: Task 4.2 - Test CSS custom properties system
+**Next Task**: Task 5.1 - Define testing requirements
 
 ## Project Structure
 
@@ -60,6 +60,7 @@ design-system/
 ### ✅ Phase 4: Component Architecture Validation
 
 - Task 4.1: Define event system standards
+- Task 4.2: Test CSS custom properties system
 
 ## Current Performance Status
 
@@ -127,7 +128,7 @@ The pre-commit hooks will automatically:
 
 ## Next Steps
 
-- **Task 4.2**: Test CSS custom properties system
+- **Task 5.1**: Define testing requirements
 
 ## Working Approach
 
@@ -160,5 +161,5 @@ The pre-commit hooks will automatically:
 
 ---
 
-**Last Updated**: After Task 4.1 completion
-**Next Task**: Task 4.2 - Test CSS custom properties system
+**Last Updated**: After Task 4.2 completion
+**Next Task**: Task 5.1 - Define testing requirements

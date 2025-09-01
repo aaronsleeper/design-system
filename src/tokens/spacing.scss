@@ -73,4 +73,28 @@ $spacing-64: $spacing-unit * 64; // 256px
   --border-radius-lg: var(--spacing-3);
   --border-radius-xl: var(--spacing-4);
   --border-radius-full: 9999px;
+
+  // Logical properties for RTL support
+  --spacing-block-start: var(--spacing-4);
+  --spacing-block-end: var(--spacing-4);
+  --spacing-inline-start: var(--spacing-4);
+  --spacing-inline-end: var(--spacing-4);
+
+  // Logical margin properties
+  --margin-block-start: var(--spacing-0);
+  --margin-block-end: var(--spacing-0);
+  --margin-inline-start: var(--spacing-0);
+  --margin-inline-end: var(--spacing-0);
+
+  // Logical padding properties
+  --padding-block-start: var(--spacing-0);
+  --padding-block-end: var(--spacing-0);
+  --padding-inline-start: var(--spacing-0);
+  --padding-inline-end: var(--spacing-0);
+
+  // Logical border properties
+  --border-block-start-width: 0;
+  --border-block-end-width: 0;
+  --border-inline-start-width: 0;
+  --border-inline-end-width: 0;
 }

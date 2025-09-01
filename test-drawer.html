@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drawer Component Test</title>
+    <link rel="stylesheet" href="./dist/assets/output-RDp_UDax.css" />
+    <style>
+      body {
+        font-family: var(--font-family-sans);
+        margin: 0;
+        padding: 20px;
+        background-color: var(--color-background);
+        color: var(--color-text-primary);
+      }
+
+      .test-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .test-section {
+        margin-bottom: 40px;
+        padding: 20px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-md);
+        background-color: var(--color-background-elevated);
+      }
+
+      .test-section h2 {
+        margin-top: 0;
+        color: var(--color-text-primary);
+      }
+
+      .test-section h3 {
+        color: var(--color-text-secondary);
+        margin-bottom: 16px;
+      }
+
+      .demo-layout {
+        position: relative;
+        height: 500px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-md);
+        background-color: var(--color-background);
+        overflow: hidden;
+      }
+
+      .demo-content {
+        padding: 20px;
+        height: 100%;
+        overflow-y: auto;
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .control-group label {
+        font-size: var(--font-size-2);
+        font-weight: var(--font-weight-medium);
+        color: var(--color-text-secondary);
+      }
+
+      .control-group select,
+      .control-group input {
+        padding: 8px 12px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-sm);
+        background-color: var(--color-background-elevated);
+        color: var(--color-text-primary);
+        font-size: var(--font-size-2);
+      }
+
+      .control-group input[type='checkbox'] {
+        width: auto;
+        margin: 0;
+      }
+
+      button {
+        padding: 8px 16px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-sm);
+        background-color: var(--color-primary);
+        color: white;
+        font-size: var(--font-size-2);
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+
+      button:hover {
+        background-color: var(--color-primary-dark);
+      }
+
+      button.secondary {
+        background-color: var(--color-secondary);
+      }
+
+      button.secondary:hover {
+        background-color: var(--color-secondary-dark);
+      }
+
+      button.success {
+        background-color: var(--color-success);
+      }
+
+      button.success:hover {
+        background-color: var(--color-success-dark);
+      }
+
+      .event-log {
+        background-color: var(--color-gray-100);
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-sm);
+        padding: 12px;
+        font-family: monospace;
+        font-size: var(--font-size-1);
+        max-height: 200px;
+        overflow-y: auto;
+        margin-top: 16px;
+      }
+
+      .event-log h4 {
+        margin: 0 0 8px 0;
+        color: var(--color-text-primary);
+      }
+
+      .event-entry {
+        margin-bottom: 4px;
+        padding: 4px;
+        background-color: var(--color-background-elevated);
+        border-radius: var(--border-radius-sm);
+      }
+
+      .event-timestamp {
+        color: var(--color-text-tertiary);
+        font-size: var(--font-size-1);
+      }
+
+      .event-type {
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-primary);
+      }
+
+      .event-data {
+        color: var(--color-text-secondary);
+        margin-left: 8px;
+      }
+
+      .drawer-content {
+        padding: 16px;
+      }
+
+      .drawer-content h4 {
+        margin: 0 0 12px 0;
+        color: var(--color-text-primary);
+      }
+
+      .drawer-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .drawer-content li {
+        margin-bottom: 8px;
+      }
+
+      .drawer-content a {
+        display: block;
+        padding: 8px 12px;
+        color: var(--color-text-primary);
+        text-decoration: none;
+        border-radius: var(--border-radius-sm);
+        transition: background-color 0.2s ease;
+      }
+
+      .drawer-content a:hover {
+        background-color: var(--color-gray-100);
+      }
+
+      .drawer-footer {
+        padding: 16px;
+        border-top: 1px solid var(--color-border);
+        background-color: var(--color-background);
+      }
+
+      .drawer-footer button {
+        width: 100%;
+      }
+
+      .status-indicator {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .status-open {
+        background-color: var(--color-success);
+      }
+
+      .status-closed {
+        background-color: var(--color-gray-400);
+      }
+
+      .status-disabled {
+        background-color: var(--color-error);
+      }
+
+      @media (max-width: 768px) {
+        .controls {
+          flex-direction: column;
+        }
+
+        .control-group {
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .control-group label {
+          min-width: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <h1>Drawer Component Test</h1>
+      <p>
+        This page provides comprehensive testing for the Drawer component with
+        all variants, sizes, positions, and states.
+      </p>
+
+      <!-- Interactive Demo -->
+      <div class="test-section">
+        <h2>Interactive Demo</h2>
+        <p>
+          Test the drawer component with different configurations and see
+          real-time updates.
+        </p>
+
+        <div class="controls">
+          <div class="control-group">
+            <label for="variant">Variant:</label>
+            <select id="variant">
+              <option value="default">Default</option>
+              <option value="overlay">Overlay</option>
+              <option value="push">Push</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="size">Size:</label>
+            <select id="size">
+              <option value="small">Small</option>
+              <option value="medium" selected>Medium</option>
+              <option value="large">Large</option>
+              <option value="xlarge">XLarge</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="position">Position:</label>
+            <select id="position">
+              <option value="left" selected>Left</option>
+              <option value="right">Right</option>
+              <option value="top">Top</option>
+              <option value="bottom">Bottom</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="open">
+              <input type="checkbox" id="open" />
+              Open
+            </label>
+          </div>
+
+          <div class="control-group">
+            <label for="disabled">
+              <input type="checkbox" id="disabled" />
+              Disabled
+            </label>
+          </div>
+
+          <div class="control-group">
+            <label for="ariaLabel">Aria Label:</label>
+            <input type="text" id="ariaLabel" value="Navigation drawer" />
+          </div>
+        </div>
+
+        <div class="controls">
+          <button onclick="openDrawer()">Open Drawer</button>
+          <button onclick="closeDrawer()" class="secondary">
+            Close Drawer
+          </button>
+          <button onclick="toggleDrawer()" class="success">
+            Toggle Drawer
+          </button>
+          <button onclick="getDimensions()">Get Dimensions</button>
+          <button onclick="clearEventLog()">Clear Events</button>
+        </div>
+
+        <div class="demo-layout">
+          <ds-drawer
+            id="test-drawer"
+            variant="default"
+            size="medium"
+            position="left"
+            aria-label="Navigation drawer"
+          >
+            <div slot="title">Navigation</div>
+            <div class="drawer-content">
+              <h4>Main Menu</h4>
+              <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Projects</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Help</a></li>
+              </ul>
+            </div>
+            <div slot="footer" class="drawer-footer">
+              <button onclick="closeDrawer()">Close</button>
+            </div>
+          </ds-drawer>
+
+          <div class="demo-content">
+            <h3>Main Content Area</h3>
+            <p>
+              This is the main content area. The drawer can be opened from
+              different positions and with different variants.
+            </p>
+
+            <div style="margin: 20px 0">
+              <strong>Current Status:</strong>
+              <span
+                id="status-indicator"
+                class="status-indicator status-closed"
+              ></span>
+              <span id="status-text">Closed</span>
+            </div>
+
+            <div style="margin: 20px 0">
+              <strong>Dimensions:</strong>
+              <span id="dimensions">Not available</span>
+            </div>
+
+            <h4>Keyboard Shortcuts:</h4>
+            <ul>
+              <li><kbd>Escape</kbd> - Close drawer</li>
+              <li><kbd>Tab</kbd> - Navigate through drawer elements</li>
+              <li>
+                <kbd>Enter</kbd> / <kbd>Space</kbd> - Activate close button
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="event-log">
+          <h4>Event Log</h4>
+          <div id="event-log-content">
+            <div class="event-entry">
+              <span class="event-timestamp">Ready</span> -
+              <span class="event-type">System</span>
+              <span class="event-data"
+                >Drawer component loaded and ready for testing</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variants Demo -->
+      <div class="test-section">
+        <h2>Variants</h2>
+        <p>Test different drawer variants and their visual differences.</p>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+          "
+        >
+          <div>
+            <h3>Default Variant</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="default" size="medium" position="left" open>
+                <div slot="title">Default</div>
+                <div class="drawer-content">
+                  <p>
+                    This is the default drawer variant with standard styling.
+                  </p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Default drawer with standard appearance.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Overlay Variant</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="overlay" size="medium" position="left" open>
+                <div slot="title">Overlay</div>
+                <div class="drawer-content">
+                  <p>This is the overlay variant with backdrop.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Overlay drawer with backdrop effect.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Push Variant</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="push" size="medium" position="left" open>
+                <div slot="title">Push</div>
+                <div class="drawer-content">
+                  <p>This is the push variant with enhanced shadow.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Push drawer with enhanced shadow effect.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sizes Demo -->
+      <div class="test-section">
+        <h2>Sizes</h2>
+        <p>
+          Test different drawer sizes for horizontal and vertical positions.
+        </p>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+          "
+        >
+          <div>
+            <h3>Small (250px)</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="default" size="small" position="left" open>
+                <div slot="title">Small</div>
+                <div class="drawer-content">
+                  <p>Small drawer (250px width).</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Small size drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Medium (300px)</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="default" size="medium" position="left" open>
+                <div slot="title">Medium</div>
+                <div class="drawer-content">
+                  <p>Medium drawer (300px width).</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Medium size drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Large (400px)</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="default" size="large" position="left" open>
+                <div slot="title">Large</div>
+                <div class="drawer-content">
+                  <p>Large drawer (400px width).</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Large size drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>XLarge (500px)</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="default" size="xlarge" position="left" open>
+                <div slot="title">XLarge</div>
+                <div class="drawer-content">
+                  <p>XLarge drawer (500px width).</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>XLarge size drawer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Positions Demo -->
+      <div class="test-section">
+        <h2>Positions</h2>
+        <p>Test different drawer positions and their animations.</p>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+          "
+        >
+          <div>
+            <h3>Left Position</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="overlay" size="medium" position="left" open>
+                <div slot="title">Left</div>
+                <div class="drawer-content">
+                  <p>Drawer slides in from the left.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Left positioned drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Right Position</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="overlay" size="medium" position="right" open>
+                <div slot="title">Right</div>
+                <div class="drawer-content">
+                  <p>Drawer slides in from the right.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Right positioned drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Top Position</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="overlay" size="medium" position="top" open>
+                <div slot="title">Top</div>
+                <div class="drawer-content">
+                  <p>Drawer slides in from the top.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Top positioned drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Bottom Position</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="overlay" size="medium" position="bottom" open>
+                <div slot="title">Bottom</div>
+                <div class="drawer-content">
+                  <p>Drawer slides in from the bottom.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Bottom positioned drawer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- States Demo -->
+      <div class="test-section">
+        <h2>States</h2>
+        <p>Test different drawer states and their behavior.</p>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+          "
+        >
+          <div>
+            <h3>Open State</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="default" size="medium" position="left" open>
+                <div slot="title">Open</div>
+                <div class="drawer-content">
+                  <p>This drawer is in the open state.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Open state drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Closed State</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer variant="default" size="medium" position="left">
+                <div slot="title">Closed</div>
+                <div class="drawer-content">
+                  <p>This drawer is in the closed state.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Closed state drawer.</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3>Disabled State</h3>
+            <div class="demo-layout" style="height: 300px">
+              <ds-drawer
+                variant="default"
+                size="medium"
+                position="left"
+                disabled
+              >
+                <div slot="title">Disabled</div>
+                <div class="drawer-content">
+                  <p>This drawer is disabled.</p>
+                </div>
+              </ds-drawer>
+              <div class="demo-content">
+                <p>Disabled state drawer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accessibility Demo -->
+      <div class="test-section">
+        <h2>Accessibility</h2>
+        <p>
+          Test accessibility features including ARIA attributes, keyboard
+          navigation, and screen reader support.
+        </p>
+
+        <div class="demo-layout" style="height: 400px">
+          <ds-drawer
+            id="accessibility-drawer"
+            variant="overlay"
+            size="medium"
+            position="left"
+            open
+            aria-label="Accessible navigation drawer"
+            aria-describedby="drawer-description"
+          >
+            <div slot="title">Accessible Drawer</div>
+            <div class="drawer-content">
+              <div
+                id="drawer-description"
+                style="
+                  margin-bottom: 16px;
+                  padding: 12px;
+                  background: var(--color-info-light);
+                  border-radius: var(--border-radius-sm);
+                "
+              >
+                This drawer demonstrates proper accessibility features including
+                ARIA labels, keyboard navigation, and screen reader support.
+              </div>
+              <nav role="navigation" aria-label="Main navigation">
+                <ul>
+                  <li><a href="#" aria-current="page">Current Page</a></li>
+                  <li><a href="#">Other Page</a></li>
+                  <li><a href="#">Settings</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div slot="footer" class="drawer-footer">
+              <button aria-describedby="logout-description">Logout</button>
+              <div
+                id="logout-description"
+                style="
+                  margin-top: 8px;
+                  font-size: var(--font-size-1);
+                  color: var(--color-text-secondary);
+                "
+              >
+                Sign out of your account
+              </div>
+            </div>
+          </ds-drawer>
+
+          <div class="demo-content">
+            <h3>Accessibility Features</h3>
+            <ul>
+              <li>Proper ARIA labels and descriptions</li>
+              <li>Keyboard navigation support (Escape to close)</li>
+              <li>Screen reader announcements</li>
+              <li>Focus management</li>
+              <li>Semantic HTML structure</li>
+            </ul>
+            <p>
+              <strong>Try:</strong> Use Tab to navigate, Escape to close, and
+              screen reader to test announcements.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Drawer } from './dist/design-system.esm.js';
+
+      // Get references to elements
+      const drawer = document.getElementById('test-drawer');
+      const variantSelect = document.getElementById('variant');
+      const sizeSelect = document.getElementById('size');
+      const positionSelect = document.getElementById('position');
+      const openCheckbox = document.getElementById('open');
+      const disabledCheckbox = document.getElementById('disabled');
+      const ariaLabelInput = document.getElementById('ariaLabel');
+      const statusIndicator = document.getElementById('status-indicator');
+      const statusText = document.getElementById('status-text');
+      const dimensionsSpan = document.getElementById('dimensions');
+      const eventLogContent = document.getElementById('event-log-content');
+
+      // Event handling
+      const eventTypes = [
+        'ds-drawer-render',
+        'ds-drawer-toggle',
+        'ds-drawer-focus',
+        'ds-drawer-blur',
+      ];
+
+      eventTypes.forEach(eventType => {
+        drawer.addEventListener(eventType, event => {
+          logEvent(eventType, event.detail);
+          updateStatus();
+        });
+      });
+
+      // Control event listeners
+      variantSelect.addEventListener('change', updateDrawer);
+      sizeSelect.addEventListener('change', updateDrawer);
+      positionSelect.addEventListener('change', updateDrawer);
+      openCheckbox.addEventListener('change', updateDrawer);
+      disabledCheckbox.addEventListener('change', updateDrawer);
+      ariaLabelInput.addEventListener('input', updateDrawer);
+
+      // Functions
+      function updateDrawer() {
+        drawer.variant = variantSelect.value;
+        drawer.size = sizeSelect.value;
+        drawer.position = positionSelect.value;
+        drawer.open = openCheckbox.checked;
+        drawer.disabled = disabledCheckbox.checked;
+        drawer.ariaLabel = ariaLabelInput.value;
+        updateStatus();
+      }
+
+      function openDrawer() {
+        drawer.openDrawer();
+        openCheckbox.checked = true;
+        updateStatus();
+      }
+
+      function closeDrawer() {
+        drawer.closeDrawer();
+        openCheckbox.checked = false;
+        updateStatus();
+      }
+
+      function toggleDrawer() {
+        drawer.toggle();
+        openCheckbox.checked = drawer.getOpenState();
+        updateStatus();
+      }
+
+      function getDimensions() {
+        const dims = drawer.getDimensions();
+        dimensionsSpan.textContent = `${dims.width}px × ${dims.height}px`;
+      }
+
+      function updateStatus() {
+        const isOpen = drawer.getOpenState();
+        const isDisabled = drawer.disabled;
+
+        if (isDisabled) {
+          statusIndicator.className = 'status-indicator status-disabled';
+          statusText.textContent = 'Disabled';
+        } else if (isOpen) {
+          statusIndicator.className = 'status-indicator status-open';
+          statusText.textContent = 'Open';
+        } else {
+          statusIndicator.className = 'status-indicator status-closed';
+          statusText.textContent = 'Closed';
+        }
+      }
+
+      function logEvent(eventType, detail) {
+        const timestamp = new Date().toLocaleTimeString();
+        const eventEntry = document.createElement('div');
+        eventEntry.className = 'event-entry';
+        eventEntry.innerHTML = `
+          <span class="event-timestamp">[${timestamp}]</span> 
+          <span class="event-type">${eventType}</span>
+          <span class="event-data">${JSON.stringify(detail.data)}</span>
+        `;
+        eventLogContent.appendChild(eventEntry);
+        eventLogContent.scrollTop = eventLogContent.scrollHeight;
+      }
+
+      function clearEventLog() {
+        eventLogContent.innerHTML = `
+          <div class="event-entry">
+            <span class="event-timestamp">Cleared</span> - <span class="event-type">System</span>
+            <span class="event-data">Event log cleared</span>
+          </div>
+        `;
+      }
+
+      // Initialize
+      updateStatus();
+    </script>
+  </body>
+</html>

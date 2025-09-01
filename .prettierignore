@@ -1,0 +1,25 @@
+# Build outputs
+dist/
+node_modules/
+*.min.js
+*.min.css
+
+# Generated files
+coverage/
+storybook-static/
+*.map
+
+# Package files
+package-lock.json
+yarn.lock
+
+# Documentation
+*.md
+
+# Configuration files that should maintain their format
+*.config.js
+*.config.ts
+vite.config.js
+rollup.config.js
+jest.config.js
+tsconfig.json

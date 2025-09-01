@@ -9,17 +9,6 @@
 @import 'shadows';
 @import 'lighting';
 
-// Base CSS custom properties
-:root {
-  // Import all token definitions
-  @import 'colors';
-  @import 'spacing';
-  @import 'typography';
-  @import 'borders';
-  @import 'shadows';
-  @import 'lighting';
-}
-
 // Theme-specific overrides
 @import '../themes/light';
 @import '../themes/dark';

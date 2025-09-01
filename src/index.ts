@@ -1,6 +1,9 @@
 // Design System Main Entry Point
 // This file exports all components and utilities for the design system
 
+// Import styles
+import './tokens/index.scss';
+
 // Export all components
 export * from './components/index.js';
 

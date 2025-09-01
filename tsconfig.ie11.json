@@ -1,0 +1,13 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"target": "ES5",
+		"lib": ["ES5", "DOM", "DOM.Iterable"],
+		"module": "ES5",
+		"moduleResolution": "node",
+		"outDir": "./dist/ie11",
+		"declarationDir": "./dist/ie11/types"
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.stories.ts", "**/*.spec.ts"]
+}

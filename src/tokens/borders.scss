@@ -1,0 +1,45 @@
+// Border Tokens
+// Border widths, styles, and colors
+
+// Border Widths
+$border-width-0: 0;
+$border-width-1: 1px;
+$border-width-2: 2px;
+$border-width-4: 4px;
+$border-width-8: 8px;
+
+// Border Styles
+$border-style-solid: solid;
+$border-style-dashed: dashed;
+$border-style-dotted: dotted;
+$border-style-double: double;
+$border-style-none: none;
+
+// CSS Custom Properties for Borders
+:root {
+  // Border Widths
+  --border-width-0: #{$border-width-0};
+  --border-width-1: #{$border-width-1};
+  --border-width-2: #{$border-width-2};
+  --border-width-4: #{$border-width-4};
+  --border-width-8: #{$border-width-8};
+
+  // Border Styles
+  --border-style-solid: #{$border-style-solid};
+  --border-style-dashed: #{$border-style-dashed};
+  --border-style-dotted: #{$border-style-dotted};
+  --border-style-double: #{$border-style-double};
+  --border-style-none: #{$border-style-none};
+
+  // Semantic Borders
+  --border-width-thin: var(--border-width-1);
+  --border-width-normal: var(--border-width-2);
+  --border-width-thick: var(--border-width-4);
+
+  // Component-specific borders
+  --border-width-button: var(--border-width-1);
+  --border-width-input: var(--border-width-1);
+  --border-width-card: var(--border-width-1);
+  --border-width-divider: var(--border-width-1);
+  --border-width-focus: var(--border-width-2);
+}

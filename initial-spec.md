@@ -51,16 +51,16 @@
 - **Base Hues**: Purple, yellow, orange, red, blue, teal, green, magenta
 - **Tonal Variants**: Each hue has `hue`, `hue-lightest`, `hue-darkest`
 - **Dynamic Calculation**: Use `color-mix()` for intermediate values
-  - Example: `color-mix(blue 60%, blue-darkest 40%)` for blue-700 equivalent
+	- Example: `color-mix(blue 60%, blue-darkest 40%)` for blue-700 equivalent
 - **Semantic Colors**: Primary, secondary, success, warning, error, info
 
 ### Lighting System
 
 - **Global Light Source**:
-  - `--light-source-color`: Color of the global light source
-  - `--light-source-position-x`: X coordinate of light source
-  - `--light-source-position-y`: Y coordinate of light source
-  - `--light-source-intensity`: Scaling factor for lighting calculations
+	- `--light-source-color`: Color of the global light source
+	- `--light-source-position-x`: X coordinate of light source
+	- `--light-source-position-y`: Y coordinate of light source
+	- `--light-source-intensity`: Scaling factor for lighting calculations
 - **Dynamic Shadows**: Multiple layered box-shadows for realistic depth
 - **Runtime Calculation**: All colors affected by light source via `color-mix()`
 - **Element Positioning**: Components track their position for shadow direction
@@ -102,14 +102,14 @@
 ### Navigation Components
 
 - **Sidebar Navigation**:
-  - Expandable/collapsible to icon-only mode
-  - Hover expansion from collapsed state
-  - Toggle button at top
-  - Smooth transitions
+	- Expandable/collapsible to icon-only mode
+	- Hover expansion from collapsed state
+	- Toggle button at top
+	- Smooth transitions
 - **Drawer/Pane**:
-  - Right-side contextual panel
-  - Similar expand/collapse functionality
-  - Context-aware content display
+	- Right-side contextual panel
+	- Similar expand/collapse functionality
+	- Context-aware content display
 
 ### Content Components
 

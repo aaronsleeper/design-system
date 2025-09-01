@@ -1,0 +1,165 @@
+// Color Tokens
+// Base hues and semantic colors for the design system
+
+// Base Hues
+$hue-purple: #8b5cf6;
+$hue-purple-lightest: #f3e8ff;
+$hue-purple-darkest: #581c87;
+
+$hue-yellow: #eab308;
+$hue-yellow-lightest: #fefce8;
+$hue-yellow-darkest: #a16207;
+
+$hue-orange: #f97316;
+$hue-orange-lightest: #fff7ed;
+$hue-orange-darkest: #c2410c;
+
+$hue-red: #ef4444;
+$hue-red-lightest: #fef2f2;
+$hue-red-darkest: #991b1b;
+
+$hue-blue: #3b82f6;
+$hue-blue-lightest: #dbeafe;
+$hue-blue-darkest: #1e3a8a;
+
+$hue-teal: #14b8a6;
+$hue-teal-lightest: #f0fdfa;
+$hue-teal-darkest: #134e4a;
+
+$hue-green: #22c55e;
+$hue-green-lightest: #f0fdf4;
+$hue-green-darkest: #14532d;
+
+$hue-magenta: #ec4899;
+$hue-magenta-lightest: #fdf2f8;
+$hue-magenta-darkest: #831843;
+
+// CSS Custom Properties for Base Hues
+:root {
+  --hue-purple: #{$hue-purple};
+  --hue-purple-lightest: #{$hue-purple-lightest};
+  --hue-purple-darkest: #{$hue-purple-darkest};
+
+  --hue-yellow: #{$hue-yellow};
+  --hue-yellow-lightest: #{$hue-yellow-lightest};
+  --hue-yellow-darkest: #{$hue-yellow-darkest};
+
+  --hue-orange: #{$hue-orange};
+  --hue-orange-lightest: #{$hue-orange-lightest};
+  --hue-orange-darkest: #{$hue-orange-darkest};
+
+  --hue-red: #{$hue-red};
+  --hue-red-lightest: #{$hue-red-lightest};
+  --hue-red-darkest: #{$hue-red-darkest};
+
+  --hue-blue: #{$hue-blue};
+  --hue-blue-lightest: #{$hue-blue-lightest};
+  --hue-blue-darkest: #{$hue-blue-darkest};
+
+  --hue-teal: #{$hue-teal};
+  --hue-teal-lightest: #{$hue-teal-lightest};
+  --hue-teal-darkest: #{$hue-teal-darkest};
+
+  --hue-green: #{$hue-green};
+  --hue-green-lightest: #{$hue-green-lightest};
+  --hue-green-darkest: #{$hue-green-darkest};
+
+  --hue-magenta: #{$hue-magenta};
+  --hue-magenta-lightest: #{$hue-magenta-lightest};
+  --hue-magenta-darkest: #{$hue-magenta-darkest};
+
+  // Semantic Colors using color-mix()
+  --color-primary: color-mix(var(--hue-blue) 80%, var(--hue-blue-darkest) 20%);
+  --color-primary-light: color-mix(
+    var(--hue-blue) 60%,
+    var(--hue-blue-lightest) 40%
+  );
+  --color-primary-dark: color-mix(
+    var(--hue-blue) 40%,
+    var(--hue-blue-darkest) 60%
+  );
+
+  --color-secondary: color-mix(
+    var(--hue-purple) 80%,
+    var(--hue-purple-darkest) 20%
+  );
+  --color-secondary-light: color-mix(
+    var(--hue-purple) 60%,
+    var(--hue-purple-lightest) 40%
+  );
+  --color-secondary-dark: color-mix(
+    var(--hue-purple) 40%,
+    var(--hue-purple-darkest) 60%
+  );
+
+  --color-success: color-mix(
+    var(--hue-green) 80%,
+    var(--hue-green-darkest) 20%
+  );
+  --color-success-light: color-mix(
+    var(--hue-green) 60%,
+    var(--hue-green-lightest) 40%
+  );
+  --color-success-dark: color-mix(
+    var(--hue-green) 40%,
+    var(--hue-green-darkest) 60%
+  );
+
+  --color-warning: color-mix(
+    var(--hue-yellow) 80%,
+    var(--hue-yellow-darkest) 20%
+  );
+  --color-warning-light: color-mix(
+    var(--hue-yellow) 60%,
+    var(--hue-yellow-lightest) 40%
+  );
+  --color-warning-dark: color-mix(
+    var(--hue-yellow) 40%,
+    var(--hue-yellow-darkest) 60%
+  );
+
+  --color-error: color-mix(var(--hue-red) 80%, var(--hue-red-darkest) 20%);
+  --color-error-light: color-mix(
+    var(--hue-red) 60%,
+    var(--hue-red-lightest) 40%
+  );
+  --color-error-dark: color-mix(var(--hue-red) 40%, var(--hue-red-darkest) 60%);
+
+  --color-info: color-mix(var(--hue-teal) 80%, var(--hue-teal-darkest) 20%);
+  --color-info-light: color-mix(
+    var(--hue-teal) 60%,
+    var(--hue-teal-lightest) 40%
+  );
+  --color-info-dark: color-mix(
+    var(--hue-teal) 40%,
+    var(--hue-teal-darkest) 60%
+  );
+
+  // Neutral Colors
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  // Background Colors
+  --color-background: var(--color-gray-50);
+  --color-background-elevated: #ffffff;
+  --color-background-overlay: rgba(0, 0, 0, 0.5);
+
+  // Text Colors
+  --color-text-primary: var(--color-gray-900);
+  --color-text-secondary: var(--color-gray-600);
+  --color-text-tertiary: var(--color-gray-500);
+  --color-text-inverse: #ffffff;
+
+  // Border Colors
+  --color-border: var(--color-gray-200);
+  --color-border-focus: var(--color-primary);
+  --color-border-error: var(--color-error);
+}

@@ -1,0 +1,33 @@
+// Lighting Tokens
+// Global light source variables for dynamic lighting system
+
+// Light Source Properties
+$light-source-color: #ffffff;
+$light-source-position-x: 50%;
+$light-source-position-y: 0%;
+$light-source-intensity: 1;
+
+// CSS Custom Properties for Lighting
+:root {
+  // Global Light Source
+  --light-source-color: #{$light-source-color};
+  --light-source-position-x: #{$light-source-position-x};
+  --light-source-position-y: #{$light-source-position-y};
+  --light-source-intensity: #{$light-source-intensity};
+
+  // Dynamic Shadow Properties
+  --shadow-offset-x: 0px;
+  --shadow-offset-y: 4px;
+  --shadow-blur: 8px;
+  --shadow-spread: 0px;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+
+  // Component-specific lighting
+  --lighting-button-shadow: var(--shadow-sm);
+  --lighting-button-shadow-hover: var(--shadow-md);
+  --lighting-card-shadow: var(--shadow-md);
+  --lighting-card-shadow-hover: var(--shadow-lg);
+  --lighting-modal-shadow: var(--shadow-2xl);
+  --lighting-dropdown-shadow: var(--shadow-lg);
+  --lighting-tooltip-shadow: var(--shadow-md);
+}

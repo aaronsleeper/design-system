@@ -1,0 +1,26 @@
+// Design System Tokens
+// This file imports all design token files and defines base CSS custom properties
+
+// Import base token files
+@import 'colors';
+@import 'spacing';
+@import 'typography';
+@import 'borders';
+@import 'shadows';
+@import 'lighting';
+
+// Base CSS custom properties
+:root {
+  // Import all token definitions
+  @import 'colors';
+  @import 'spacing';
+  @import 'typography';
+  @import 'borders';
+  @import 'shadows';
+  @import 'lighting';
+}
+
+// Theme-specific overrides
+@import '../themes/light';
+@import '../themes/dark';
+@import '../themes/high-contrast';

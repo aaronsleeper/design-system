@@ -1,0 +1,23 @@
+// High Contrast Theme
+// High contrast theme color overrides
+
+.theme-high-contrast {
+  // Background Colors
+  --color-background: #000000;
+  --color-background-elevated: #000000;
+  --color-background-overlay: rgba(0, 0, 0, 0.9);
+
+  // Text Colors
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-text-tertiary: #ffffff;
+  --color-text-inverse: #000000;
+
+  // Border Colors
+  --color-border: #ffffff;
+  --color-border-focus: #ffff00;
+  --color-border-error: #ff0000;
+
+  // Shadow Colors
+  --shadow-color: rgba(255, 255, 255, 0.5);
+}

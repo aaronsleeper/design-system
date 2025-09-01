@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stack Component - Manual Testing</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+      }
+
+      .test-section {
+        background: white;
+        margin: 20px 0;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .test-section h2 {
+        margin-top: 0;
+        color: #333;
+        border-bottom: 2px solid #007acc;
+        padding-bottom: 10px;
+      }
+
+      .test-section h3 {
+        color: #555;
+        margin-top: 30px;
+      }
+
+      .example {
+        margin: 15px 0;
+        padding: 15px;
+        background: #f8f9fa;
+        border-left: 4px solid #007acc;
+        border-radius: 4px;
+      }
+
+      .example h4 {
+        margin-top: 0;
+        color: #333;
+      }
+
+      .controls {
+        margin: 10px 0;
+        padding: 10px;
+        background: #e9ecef;
+        border-radius: 4px;
+      }
+
+      .controls label {
+        display: inline-block;
+        margin-right: 15px;
+        font-weight: 500;
+      }
+
+      .controls select,
+      .controls input {
+        margin-right: 15px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .controls button {
+        background: #007acc;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 10px;
+      }
+
+      .controls button:hover {
+        background: #005a9e;
+      }
+
+      .event-log {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10px 0;
+        max-height: 200px;
+        overflow-y: auto;
+        font-family: monospace;
+        font-size: 12px;
+      }
+
+      .event-log .event {
+        margin: 2px 0;
+        padding: 2px 5px;
+        border-radius: 3px;
+      }
+
+      .event-log .event.render {
+        background: #d4edda;
+      }
+      .event-log .event.focus {
+        background: #d1ecf1;
+      }
+      .event-log .event.blur {
+        background: #f8d7da;
+      }
+      .event-log .event.activate {
+        background: #fff3cd;
+      }
+
+      .stack-item {
+        background: white;
+        padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+
+      .stack-item h4 {
+        margin-top: 0;
+        color: #333;
+      }
+
+      .status {
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        display: inline-block;
+        margin: 5px 0;
+      }
+
+      .status.success {
+        background: #d4edda;
+        color: #155724;
+      }
+      .status.info {
+        background: #d1ecf1;
+        color: #0c5460;
+      }
+      .status.warning {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .accessibility-test {
+        background: #e7f3ff;
+        border: 1px solid #b3d9ff;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .accessibility-test h4 {
+        margin-top: 0;
+        color: #0066cc;
+      }
+
+      .keyboard-instructions {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+
+      .keyboard-instructions strong {
+        color: #856404;
+      }
+
+      .stack-demo-item {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .stack-demo-item h3 {
+        margin-top: 0;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Stack Component - Manual Testing</h1>
+    <p>
+      This page provides comprehensive manual testing for the Stack component
+      with various configurations and interactive features.
+    </p>
+
+    <!-- Basic Variants Test -->
+    <div class="test-section">
+      <h2>1. Basic Variants</h2>
+      <p>Test different stack variants and their visual appearance.</p>
+
+      <div class="example">
+        <h4>Default Variant (Vertical)</h4>
+        <ds-stack variant="default" size="medium">
+          <div class="stack-demo-item">
+            <h3>Stack Item 1</h3>
+            <p>Default stack with vertical layout.</p>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Stack Item 2</h3>
+            <p>Default stack with vertical layout.</p>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Stack Item 3</h3>
+            <p>Default stack with vertical layout.</p>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Horizontal Variant</h4>
+        <ds-stack variant="horizontal" size="medium">
+          <div class="stack-demo-item">
+            <h3>Horizontal Item 1</h3>
+            <p>Horizontal stack layout.</p>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Horizontal Item 2</h3>
+            <p>Horizontal stack layout.</p>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Horizontal Item 3</h3>
+            <p>Horizontal stack layout.</p>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Vertical Variant</h4>
+        <ds-stack variant="vertical" size="medium">
+          <div class="stack-demo-item">
+            <h3>Vertical Item 1</h3>
+            <p>Vertical stack with explicit direction.</p>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Vertical Item 2</h3>
+            <p>Vertical stack with explicit direction.</p>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Vertical Item 3</h3>
+            <p>Vertical stack with explicit direction.</p>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <!-- Sizes Test -->
+    <div class="test-section">
+      <h2>2. Size Variants</h2>
+      <p>Test different stack sizes and their gap behavior.</p>
+
+      <div class="example">
+        <h4>Small Size</h4>
+        <ds-stack variant="horizontal" size="small">
+          <div class="stack-item">
+            <h4>Small Gap</h4>
+            <p>Minimal gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Small Gap</h4>
+            <p>Minimal gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Small Gap</h4>
+            <p>Minimal gap between items.</p>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Medium Size</h4>
+        <ds-stack variant="horizontal" size="medium">
+          <div class="stack-item">
+            <h4>Medium Gap</h4>
+            <p>Standard gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Medium Gap</h4>
+            <p>Standard gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Medium Gap</h4>
+            <p>Standard gap between items.</p>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Large Size</h4>
+        <ds-stack variant="horizontal" size="large">
+          <div class="stack-item">
+            <h4>Large Gap</h4>
+            <p>Generous gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Large Gap</h4>
+            <p>Generous gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Large Gap</h4>
+            <p>Generous gap between items.</p>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>XLarge Size</h4>
+        <ds-stack variant="horizontal" size="xlarge">
+          <div class="stack-item">
+            <h4>XLarge Gap</h4>
+            <p>Maximum gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>XLarge Gap</h4>
+            <p>Maximum gap between items.</p>
+          </div>
+          <div class="stack-item">
+            <h4>XLarge Gap</h4>
+            <p>Maximum gap between items.</p>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <!-- Alignment Test -->
+    <div class="test-section">
+      <h2>3. Alignment Options</h2>
+      <p>Test different alignment options for stack items.</p>
+
+      <div class="example">
+        <h4>Align Items: Start</h4>
+        <ds-stack variant="horizontal" size="medium" align-items="start">
+          <div class="stack-item" style="padding: 10px">
+            <h4>Short</h4>
+          </div>
+          <div class="stack-item" style="padding: 40px">
+            <h4>Much Longer Content</h4>
+            <p>This item has more content to demonstrate alignment.</p>
+          </div>
+          <div class="stack-item" style="padding: 20px">
+            <h4>Medium</h4>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Align Items: Center</h4>
+        <ds-stack variant="horizontal" size="medium" align-items="center">
+          <div class="stack-item" style="padding: 10px">
+            <h4>Short</h4>
+          </div>
+          <div class="stack-item" style="padding: 40px">
+            <h4>Much Longer Content</h4>
+            <p>This item has more content to demonstrate alignment.</p>
+          </div>
+          <div class="stack-item" style="padding: 20px">
+            <h4>Medium</h4>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Align Items: Stretch</h4>
+        <ds-stack variant="horizontal" size="medium" align-items="stretch">
+          <div class="stack-item" style="padding: 10px">
+            <h4>Short</h4>
+          </div>
+          <div class="stack-item" style="padding: 40px">
+            <h4>Much Longer Content</h4>
+            <p>This item has more content to demonstrate alignment.</p>
+          </div>
+          <div class="stack-item" style="padding: 20px">
+            <h4>Medium</h4>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <!-- Justify Content Test -->
+    <div class="test-section">
+      <h2>4. Justify Content Options</h2>
+      <p>Test different justify content options for stack items.</p>
+
+      <div class="example">
+        <h4>Justify Content: Start</h4>
+        <ds-stack variant="horizontal" size="medium" justify-content="start">
+          <div class="stack-item">
+            <h4>Item 1</h4>
+          </div>
+          <div class="stack-item">
+            <h4>Item 2</h4>
+          </div>
+          <div class="stack-item">
+            <h4>Item 3</h4>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Justify Content: Center</h4>
+        <ds-stack variant="horizontal" size="medium" justify-content="center">
+          <div class="stack-item">
+            <h4>Item 1</h4>
+          </div>
+          <div class="stack-item">
+            <h4>Item 2</h4>
+          </div>
+          <div class="stack-item">
+            <h4>Item 3</h4>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Justify Content: Space Between</h4>
+        <ds-stack
+          variant="horizontal"
+          size="medium"
+          justify-content="space-between"
+        >
+          <div class="stack-item">
+            <h4>Item 1</h4>
+          </div>
+          <div class="stack-item">
+            <h4>Item 2</h4>
+          </div>
+          <div class="stack-item">
+            <h4>Item 3</h4>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <!-- Wrap Test -->
+    <div class="test-section">
+      <h2>5. Wrap Options</h2>
+      <p>Test wrap functionality for stack items.</p>
+
+      <div class="example">
+        <h4>No Wrap (Default)</h4>
+        <ds-stack variant="horizontal" size="medium" style="max-width: 400px">
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 1</h4>
+          </div>
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 2</h4>
+          </div>
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 3</h4>
+          </div>
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 4</h4>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>With Wrap</h4>
+        <ds-stack
+          variant="horizontal"
+          size="medium"
+          wrap
+          style="max-width: 400px"
+        >
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 1</h4>
+          </div>
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 2</h4>
+          </div>
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 3</h4>
+          </div>
+          <div class="stack-item" style="min-width: 120px">
+            <h4>Item 4</h4>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <!-- States Test -->
+    <div class="test-section">
+      <h2>6. Component States</h2>
+      <p>Test different stack states including disabled state.</p>
+
+      <div class="example">
+        <h4>Normal State</h4>
+        <ds-stack variant="horizontal" size="medium">
+          <div class="stack-item">
+            <h4>Normal Stack</h4>
+            <p>Fully interactive and accessible stack.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Normal Stack</h4>
+            <p>Fully interactive and accessible stack.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Normal Stack</h4>
+            <p>Fully interactive and accessible stack.</p>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Disabled State</h4>
+        <ds-stack variant="horizontal" size="medium" disabled>
+          <div class="stack-item">
+            <h4>Disabled Stack</h4>
+            <p>This stack is disabled and not interactive.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Disabled Stack</h4>
+            <p>This stack is disabled and not interactive.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Disabled Stack</h4>
+            <p>This stack is disabled and not interactive.</p>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <!-- Interactive Controls -->
+    <div class="test-section">
+      <h2>7. Interactive Controls</h2>
+      <p>
+        Use these controls to dynamically test different stack configurations.
+      </p>
+
+      <div class="controls">
+        <label>Variant:</label>
+        <select id="variantSelect">
+          <option value="default">Default</option>
+          <option value="horizontal">Horizontal</option>
+          <option value="vertical">Vertical</option>
+        </select>
+
+        <label>Size:</label>
+        <select id="sizeSelect">
+          <option value="small">Small</option>
+          <option value="medium" selected>Medium</option>
+          <option value="large">Large</option>
+          <option value="xlarge">XLarge</option>
+        </select>
+
+        <label>Align Items:</label>
+        <select id="alignItemsSelect">
+          <option value="start">Start</option>
+          <option value="center">Center</option>
+          <option value="end">End</option>
+          <option value="stretch" selected>Stretch</option>
+        </select>
+
+        <label>Justify Content:</label>
+        <select id="justifyContentSelect">
+          <option value="start" selected>Start</option>
+          <option value="center">Center</option>
+          <option value="end">End</option>
+          <option value="space-between">Space Between</option>
+          <option value="space-around">Space Around</option>
+          <option value="space-evenly">Space Evenly</option>
+        </select>
+
+        <label>Wrap:</label>
+        <select id="wrapSelect">
+          <option value="false">No Wrap</option>
+          <option value="true">Wrap</option>
+        </select>
+
+        <label>Custom Gap:</label>
+        <input type="text" id="gapInput" placeholder="e.g., 20px" />
+
+        <button onclick="updateStack()">Update Stack</button>
+        <button onclick="clearEvents()">Clear Events</button>
+      </div>
+
+      <div class="example">
+        <h4>Dynamic Stack</h4>
+        <ds-stack
+          id="dynamicStack"
+          variant="default"
+          size="medium"
+          aria-label="Dynamic test stack"
+        >
+          <div class="stack-demo-item">
+            <h3>Dynamic Item 1</h3>
+            <p>
+              This stack's properties can be changed using the controls above.
+            </p>
+            <div id="stackStatus" class="status info">
+              Ready for interaction
+            </div>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Dynamic Item 2</h3>
+            <p>
+              This stack's properties can be changed using the controls above.
+            </p>
+          </div>
+          <div class="stack-demo-item">
+            <h3>Dynamic Item 3</h3>
+            <p>
+              This stack's properties can be changed using the controls above.
+            </p>
+          </div>
+        </ds-stack>
+      </div>
+
+      <div class="event-log" id="eventLog">
+        <div style="font-weight: bold; margin-bottom: 10px">Event Log:</div>
+      </div>
+    </div>
+
+    <!-- Accessibility Testing -->
+    <div class="test-section">
+      <h2>8. Accessibility Testing</h2>
+      <p>
+        Test accessibility features including keyboard navigation and screen
+        reader support.
+      </p>
+
+      <div class="accessibility-test">
+        <h4>Keyboard Navigation Test</h4>
+        <p>Use the following stacks to test keyboard accessibility:</p>
+
+        <div class="keyboard-instructions">
+          <strong>Instructions:</strong>
+          <ul>
+            <li>
+              Use <strong>Tab</strong> to navigate between focusable stacks
+            </li>
+            <li>
+              Use <strong>Enter</strong> or <strong>Space</strong> to activate
+              stacks
+            </li>
+            <li>Use <strong>Shift+Tab</strong> to navigate backwards</li>
+          </ul>
+        </div>
+
+        <div class="example">
+          <h4>Focusable Stack 1</h4>
+          <ds-stack
+            variant="horizontal"
+            size="medium"
+            aria-label="First focusable stack"
+            role="group"
+          >
+            <div class="stack-item">
+              <h4>Stack 1 Item 1</h4>
+              <p>
+                This stack should be focusable and support keyboard activation.
+              </p>
+            </div>
+            <div class="stack-item">
+              <h4>Stack 1 Item 2</h4>
+              <p>
+                This stack should be focusable and support keyboard activation.
+              </p>
+            </div>
+            <div class="stack-item">
+              <h4>Stack 1 Item 3</h4>
+              <p>
+                This stack should be focusable and support keyboard activation.
+              </p>
+            </div>
+          </ds-stack>
+        </div>
+
+        <div class="example">
+          <h4>Focusable Stack 2</h4>
+          <ds-stack
+            variant="horizontal"
+            size="medium"
+            aria-label="Second focusable stack"
+            role="group"
+          >
+            <div class="stack-item">
+              <h4>Stack 2 Item 1</h4>
+              <p>
+                This stack should also be focusable and support keyboard
+                activation.
+              </p>
+            </div>
+            <div class="stack-item">
+              <h4>Stack 2 Item 2</h4>
+              <p>
+                This stack should also be focusable and support keyboard
+                activation.
+              </p>
+            </div>
+            <div class="stack-item">
+              <h4>Stack 2 Item 3</h4>
+              <p>
+                This stack should also be focusable and support keyboard
+                activation.
+              </p>
+            </div>
+          </ds-stack>
+        </div>
+
+        <div class="example">
+          <h4>ARIA Described By Test</h4>
+          <p id="stack-description">
+            This text describes the stack below for screen reader users.
+          </p>
+          <ds-stack
+            variant="horizontal"
+            size="medium"
+            aria-describedby="stack-description"
+            aria-label="Stack with description"
+          >
+            <div class="stack-item">
+              <h4>Described Item 1</h4>
+              <p>This stack has an aria-describedby attribute.</p>
+            </div>
+            <div class="stack-item">
+              <h4>Described Item 2</h4>
+              <p>This stack has an aria-describedby attribute.</p>
+            </div>
+            <div class="stack-item">
+              <h4>Described Item 3</h4>
+              <p>This stack has an aria-describedby attribute.</p>
+            </div>
+          </ds-stack>
+        </div>
+      </div>
+    </div>
+
+    <!-- Layout Examples -->
+    <div class="test-section">
+      <h2>9. Layout Examples</h2>
+      <p>Real-world examples of stack usage in different layout scenarios.</p>
+
+      <div class="example">
+        <h4>Navigation Bar Layout</h4>
+        <ds-stack
+          variant="horizontal"
+          size="medium"
+          align-items="center"
+          justify-content="space-between"
+        >
+          <div class="stack-item">
+            <h4>Logo</h4>
+          </div>
+          <ds-stack variant="horizontal" size="small">
+            <button
+              style="
+                background: #007acc;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+              "
+            >
+              Home
+            </button>
+            <button
+              style="
+                background: #007acc;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+              "
+            >
+              About
+            </button>
+            <button
+              style="
+                background: #007acc;
+                color: white;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 4px;
+                cursor: pointer;
+              "
+            >
+              Contact
+            </button>
+          </ds-stack>
+        </ds-stack>
+      </div>
+
+      <div class="example">
+        <h4>Card Layout</h4>
+        <ds-stack variant="vertical" size="large">
+          <div class="stack-item">
+            <h4>Card Header</h4>
+            <p>
+              This is a card layout using vertical stack with consistent
+              spacing.
+            </p>
+            <ds-stack variant="horizontal" size="small" justify-content="end">
+              <button
+                style="
+                  background: #6c757d;
+                  color: white;
+                  border: none;
+                  padding: 8px 16px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                "
+              >
+                Cancel
+              </button>
+              <button
+                style="
+                  background: #007acc;
+                  color: white;
+                  border: none;
+                  padding: 8px 16px;
+                  border-radius: 4px;
+                  cursor: pointer;
+                "
+              >
+                Save
+              </button>
+            </ds-stack>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <!-- Custom Styling Test -->
+    <div class="test-section">
+      <h2>10. Custom Styling</h2>
+      <p>Test stacks with custom styling properties.</p>
+
+      <div class="example">
+        <h4>Custom Gap</h4>
+        <ds-stack variant="horizontal" size="medium" gap="30px">
+          <div class="stack-item">
+            <h4>Custom Gap</h4>
+            <p>This stack has a custom gap of 30px.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Custom Gap</h4>
+            <p>This stack has a custom gap of 30px.</p>
+          </div>
+          <div class="stack-item">
+            <h4>Custom Gap</h4>
+            <p>This stack has a custom gap of 30px.</p>
+          </div>
+        </ds-stack>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Stack } from './dist/components/layout/stack.js';
+
+      // Get references to elements
+      const dynamicStack = document.getElementById('dynamicStack');
+      const variantSelect = document.getElementById('variantSelect');
+      const sizeSelect = document.getElementById('sizeSelect');
+      const alignItemsSelect = document.getElementById('alignItemsSelect');
+      const justifyContentSelect = document.getElementById(
+        'justifyContentSelect'
+      );
+      const wrapSelect = document.getElementById('wrapSelect');
+      const gapInput = document.getElementById('gapInput');
+      const eventLog = document.getElementById('eventLog');
+      const stackStatus = document.getElementById('stackStatus');
+
+      // Event logging function
+      function logEvent(eventType, detail) {
+        const eventDiv = document.createElement('div');
+        eventDiv.className = `event ${eventType}`;
+        eventDiv.innerHTML = `<strong>${eventType.toUpperCase()}</strong>: ${JSON.stringify(
+          detail,
+          null,
+          2
+        )}`;
+        eventLog.appendChild(eventDiv);
+        eventLog.scrollTop = eventLog.scrollHeight;
+      }
+
+      // Clear events function
+      window.clearEvents = function () {
+        eventLog.innerHTML =
+          '<div style="font-weight: bold; margin-bottom: 10px;">Event Log:</div>';
+      };
+
+      // Update stack function
+      window.updateStack = function () {
+        const variant = variantSelect.value;
+        const size = sizeSelect.value;
+        const alignItems = alignItemsSelect.value;
+        const justifyContent = justifyContentSelect.value;
+        const wrap = wrapSelect.value === 'true';
+        const gap = gapInput.value;
+
+        dynamicStack.variant = variant;
+        dynamicStack.size = size;
+        dynamicStack.alignItems = alignItems;
+        dynamicStack.justifyContent = justifyContent;
+        dynamicStack.wrap = wrap;
+        dynamicStack.gap = gap || undefined;
+
+        stackStatus.textContent = `Updated: ${variant} ${size} ${alignItems} ${justifyContent} ${
+          wrap ? 'wrap' : 'no-wrap'
+        }${gap ? ` (${gap})` : ''}`;
+        stackStatus.className = 'status success';
+      };
+
+      // Add event listeners to all stacks
+      document.addEventListener('ds-stack-render', event => {
+        logEvent('render', event.detail);
+      });
+
+      document.addEventListener('ds-stack-focus', event => {
+        logEvent('focus', event.detail);
+      });
+
+      document.addEventListener('ds-stack-blur', event => {
+        logEvent('blur', event.detail);
+      });
+
+      document.addEventListener('ds-stack-activate', event => {
+        logEvent('activate', event.detail);
+      });
+
+      // Add focus/blur event listeners to dynamic stack
+      dynamicStack.addEventListener('ds-stack-focus', () => {
+        stackStatus.textContent = 'Stack focused';
+        stackStatus.className = 'status info';
+      });
+
+      dynamicStack.addEventListener('ds-stack-blur', () => {
+        stackStatus.textContent = 'Stack blurred';
+        stackStatus.className = 'status warning';
+      });
+
+      dynamicStack.addEventListener('ds-stack-activate', () => {
+        stackStatus.textContent = 'Stack activated!';
+        stackStatus.className = 'status success';
+      });
+
+      // Initialize
+      console.log('Stack component manual testing page loaded');
+      logEvent('init', { message: 'Page loaded successfully' });
+    </script>
+  </body>
+</html>

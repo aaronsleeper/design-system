@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox Component Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 2rem;
+      background-color: #f9fafb;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #1f2937;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #374151;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    h3 {
+      color: #4b5563;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .section {
+      background: white;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .demo-item {
+      padding: 1rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      background: #f9fafb;
+    }
+
+    .demo-item h4 {
+      margin: 0 0 0.5rem 0;
+      color: #374151;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .controls button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+
+    .controls button:hover {
+      background: #f3f4f6;
+    }
+
+    .controls button:active {
+      background: #e5e7eb;
+    }
+
+    .event-log {
+      background: #1f2937;
+      color: #f9fafb;
+      padding: 1rem;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.75rem;
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 1rem;
+    }
+
+    .event-log .event {
+      margin-bottom: 0.25rem;
+      padding: 0.25rem;
+      border-radius: 3px;
+    }
+
+    .event-log .event.change { background: rgba(59, 130, 246, 0.2); }
+    .event-log .event.focus { background: rgba(34, 197, 94, 0.2); }
+    .event-log .event.blur { background: rgba(234, 179, 8, 0.2); }
+    .event-log .event.validate { background: rgba(239, 68, 68, 0.2); }
+
+    .form-demo {
+      background: #f3f4f6;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .form-demo form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-demo button[type="submit"] {
+      padding: 0.75rem 1.5rem;
+      background: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .form-demo button[type="submit"]:hover {
+      background: #2563eb;
+    }
+
+    .form-results {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.875rem;
+    }
+
+    .accessibility-demo {
+      background: #fef3c7;
+      border: 1px solid #f59e0b;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .accessibility-demo h4 {
+      margin: 0 0 0.5rem 0;
+      color: #92400e;
+    }
+
+    .accessibility-demo p {
+      margin: 0;
+      color: #92400e;
+      font-size: 0.875rem;
+    }
+
+    .performance-info {
+      background: #ede9fe;
+      border: 1px solid #8b5cf6;
+      padding: 1rem;
+      border-radius: 6px;
+      margin-top: 1rem;
+    }
+
+    .performance-info h4 {
+      margin: 0 0 0.5rem 0;
+      color: #5b21b6;
+    }
+
+    .performance-info p {
+      margin: 0;
+      color: #5b21b6;
+      font-size: 0.875rem;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #111827;
+        color: #f9fafb;
+      }
+
+      .section {
+        background: #1f2937;
+        border: 1px solid #374151;
+      }
+
+      h1, h2, h3 {
+        color: #f9fafb;
+      }
+
+      .demo-item {
+        background: #374151;
+        border-color: #4b5563;
+      }
+
+      .demo-item h4 {
+        color: #f9fafb;
+      }
+
+      .controls button {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+      }
+
+      .controls button:hover {
+        background: #4b5563;
+      }
+
+      .controls button:active {
+        background: #6b7280;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Checkbox Component Test</h1>
+    
+    <!-- Basic Functionality -->
+    <div class="section">
+      <h2>Basic Functionality</h2>
+      <div class="demo-grid">
+        <div class="demo-item">
+          <h4>Default Checkbox</h4>
+          <ds-checkbox>Default checkbox</ds-checkbox>
+        </div>
+        
+        <div class="demo-item">
+          <h4>Checked Checkbox</h4>
+          <ds-checkbox checked>Checked checkbox</ds-checkbox>
+        </div>
+        
+        <div class="demo-item">
+          <h4>Indeterminate Checkbox</h4>
+          <ds-checkbox indeterminate>Indeterminate checkbox</ds-checkbox>
+        </div>
+        
+        <div class="demo-item">
+          <h4>Disabled Checkbox</h4>
+          <ds-checkbox disabled>Disabled checkbox</ds-checkbox>
+        </div>
+        
+        <div class="demo-item">
+          <h4>Required Checkbox</h4>
+          <ds-checkbox required>Required checkbox</ds-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <!-- Size Variants -->
+    <div class="section">
+      <h2>Size Variants</h2>
+      <div class="checkbox-group">
+        <ds-checkbox size="small">Small checkbox</ds-checkbox>
+        <ds-checkbox size="medium">Medium checkbox</ds-checkbox>
+        <ds-checkbox size="large">Large checkbox</ds-checkbox>
+      </div>
+    </div>
+
+    <!-- Validation States -->
+    <div class="section">
+      <h2>Validation States</h2>
+      <div class="checkbox-group">
+        <ds-checkbox validation-state="default">Default validation</ds-checkbox>
+        <ds-checkbox validation-state="error" error-message="This field is required">
+          Error validation
+        </ds-checkbox>
+        <ds-checkbox validation-state="success" success-message="Great! This looks good.">
+          Success validation
+        </ds-checkbox>
+        <ds-checkbox validation-state="warning" warning-message="Please review this option">
+          Warning validation
+        </ds-checkbox>
+      </div>
+    </div>
+
+    <!-- Interactive Controls -->
+    <div class="section">
+      <h2>Interactive Controls</h2>
+      <ds-checkbox id="interactive-checkbox">Interactive checkbox</ds-checkbox>
+      <div class="controls">
+        <button onclick="toggleCheckbox()">Toggle</button>
+        <button onclick="checkCheckbox()">Check</button>
+        <button onclick="uncheckCheckbox()">Uncheck</button>
+        <button onclick="setIndeterminate()">Set Indeterminate</button>
+        <button onclick="clearEventLog()">Clear Events</button>
+      </div>
+      <div class="event-log" id="event-log">
+        <div>Event log will appear here...</div>
+      </div>
+    </div>
+
+    <!-- Form Integration -->
+    <div class="section">
+      <h2>Form Integration</h2>
+      <div class="form-demo">
+        <form id="test-form">
+          <h3>User Preferences</h3>
+          
+          <ds-checkbox name="notifications" value="email">
+            Email notifications
+          </ds-checkbox>
+          
+          <ds-checkbox name="notifications" value="sms">
+            SMS notifications
+          </ds-checkbox>
+          
+          <ds-checkbox name="marketing" value="newsletter">
+            Marketing newsletter
+          </ds-checkbox>
+          
+          <ds-checkbox name="terms" value="accepted" required>
+            I accept the terms and conditions
+          </ds-checkbox>
+          
+          <button type="submit">Submit Form</button>
+        </form>
+        <div class="form-results" id="form-results" style="display: none;">
+          Form data will appear here...
+        </div>
+      </div>
+    </div>
+
+    <!-- Accessibility Demo -->
+    <div class="section">
+      <h2>Accessibility Features</h2>
+      <div class="accessibility-demo">
+        <h4>Keyboard Navigation</h4>
+        <p>Use Tab to navigate between checkboxes, Space to toggle, and Enter to activate.</p>
+      </div>
+      
+      <div class="checkbox-group">
+        <ds-checkbox aria-label="Accept terms and conditions">
+          Accept terms and conditions
+        </ds-checkbox>
+        
+        <ds-checkbox aria-describedby="help-text">
+          Subscribe to newsletter
+        </ds-checkbox>
+        <div id="help-text" style="font-size: 0.875rem; color: #6b7280; margin-top: -0.5rem;">
+          We'll send you updates about new features and improvements.
+        </div>
+        
+        <ds-checkbox required aria-invalid="false">
+          Required field
+        </ds-checkbox>
+      </div>
+    </div>
+
+    <!-- Complex Content -->
+    <div class="section">
+      <h2>Complex Content</h2>
+      <div class="checkbox-group">
+        <ds-checkbox>
+          <strong>Bold text</strong> with <em>emphasis</em>
+        </ds-checkbox>
+        
+        <ds-checkbox>
+          <div>
+            <div style="font-weight: 600;">Multi-line content</div>
+            <div style="font-size: 0.875rem; color: #6b7280;">
+              This checkbox has multiple lines of text content
+            </div>
+          </div>
+        </ds-checkbox>
+        
+        <ds-checkbox>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="width: 20px; height: 20px; background: #3b82f6; border-radius: 4px;"></span>
+            <span>Checkbox with icon</span>
+          </div>
+        </ds-checkbox>
+      </div>
+    </div>
+
+    <!-- Performance Info -->
+    <div class="section">
+      <h2>Performance Information</h2>
+      <div class="performance-info">
+        <h4>Component Performance</h4>
+        <p>Checkbox component is optimized for performance with minimal DOM manipulation and efficient event handling.</p>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import './dist/components/form/checkbox.js';
+
+    // Interactive checkbox controls
+    const interactiveCheckbox = document.getElementById('interactive-checkbox');
+    const eventLog = document.getElementById('event-log');
+
+    function logEvent(eventType, detail) {
+      const timestamp = new Date().toLocaleTimeString();
+      const eventDiv = document.createElement('div');
+      eventDiv.className = `event ${eventType}`;
+      eventDiv.innerHTML = `
+        <strong>[${timestamp}]</strong> ${eventType.toUpperCase()}: 
+        ${JSON.stringify(detail, null, 2)}
+      `;
+      eventLog.appendChild(eventDiv);
+      eventLog.scrollTop = eventLog.scrollHeight;
+    }
+
+    // Add event listeners to all checkboxes
+    document.addEventListener('ds-checkbox-change', (e) => {
+      logEvent('change', e.detail);
+    });
+
+    document.addEventListener('ds-checkbox-focus', (e) => {
+      logEvent('focus', e.detail);
+    });
+
+    document.addEventListener('ds-checkbox-blur', (e) => {
+      logEvent('blur', e.detail);
+    });
+
+    document.addEventListener('ds-checkbox-validate', (e) => {
+      logEvent('validate', e.detail);
+    });
+
+    // Interactive controls
+    window.toggleCheckbox = () => {
+      interactiveCheckbox.toggle();
+    };
+
+    window.checkCheckbox = () => {
+      interactiveCheckbox.check();
+    };
+
+    window.uncheckCheckbox = () => {
+      interactiveCheckbox.uncheck();
+    };
+
+    window.setIndeterminate = () => {
+      interactiveCheckbox.setIndeterminate();
+    };
+
+    window.clearEventLog = () => {
+      eventLog.innerHTML = '<div>Event log cleared...</div>';
+    };
+
+    // Form submission
+    document.getElementById('test-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const results = document.getElementById('form-results');
+      
+      let formDataText = 'Form Data:\n';
+      for (let [key, value] of formData.entries()) {
+        formDataText += `${key}: ${value}\n`;
+      }
+      
+      results.textContent = formDataText;
+      results.style.display = 'block';
+    });
+
+    // Performance monitoring
+    const startTime = performance.now();
+    window.addEventListener('load', () => {
+      const loadTime = performance.now() - startTime;
+      console.log(`Checkbox component loaded in ${loadTime.toFixed(2)}ms`);
+    });
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 Lit-based web component design system with TypeScript, SCSS, and Storybook integration.
 
 **Current Phase**: Implementation Phase - Core Components Development
-**Status**: Button, Input, Typography, and Card components completed, ready for next component
+**Status**: Button, Input, Typography, Card, Select, and Checkbox components completed, ready for next component
 
 ## Project Structure
 
@@ -133,6 +133,58 @@ design-system/
 - Dark mode and high contrast support
 - Performance optimized within budget constraints
 
+### ✅ Implementation Phase - Select Component Complete
+
+**Select Component Features:**
+- **Types**: single, multiple, searchable
+- **Sizes**: small, medium, large
+- **States**: default, focus, error, disabled, loading
+- **Options**: Support for option groups and custom options
+- **Accessibility**: WCAG 2.1 AA compliant with proper labeling
+- **Events**: `ds-select-change`, `ds-select-focus`, `ds-select-blur`, `ds-select-open`, `ds-select-close`
+- **Styling**: Consistent with established design tokens
+- **Comprehensive tests**: 20+ test cases covering all functionality
+- **Storybook stories**: 12+ interactive stories showcasing all features
+
+**Select Implementation Details:**
+- Uses `DesignSystemElement` base class
+- Follows established event system patterns
+- Implements CSS custom properties for theming
+- Uses `font-size-1`, `font-size-2` naming convention
+- Fully accessible with proper ARIA attributes and keyboard navigation
+- Support for single/multiple selection with checkboxes
+- Searchable functionality with real-time filtering
+- Option groups for organized selections
+- Loading state with spinner indicator
+- Clearable functionality with clear button
+- Dark mode and high contrast support
+- Performance optimized within budget constraints
+
+### ✅ Implementation Phase - Checkbox Component Complete
+
+**Checkbox Component Features:**
+- **Sizes**: small, medium, large
+- **States**: default, focus, error, disabled, indeterminate
+- **Validation**: Built-in validation with error messages
+- **Accessibility**: WCAG 2.1 AA compliant with proper labeling
+- **Events**: `ds-checkbox-change`, `ds-checkbox-focus`, `ds-checkbox-blur`, `ds-checkbox-validate`
+- **Styling**: Consistent with established design tokens
+- **Comprehensive tests**: 20+ test cases covering all functionality
+- **Storybook stories**: 10+ interactive stories showcasing all features
+
+**Checkbox Implementation Details:**
+- Uses `DesignSystemElement` base class
+- Follows established event system patterns
+- Implements CSS custom properties for theming
+- Uses `font-size-1`, `font-size-2` naming convention
+- Fully accessible with proper ARIA attributes and keyboard navigation
+- Support for indeterminate state with visual indicator
+- Built-in validation with custom error messages
+- Public methods for programmatic control (toggle, check, uncheck, setIndeterminate)
+- Form integration with proper name and value attributes
+- Dark mode and high contrast support
+- Performance optimized within budget constraints
+
 ## Current Performance Status
 
 - ESM Bundle: 15.1KB / 20KB target ✅
@@ -144,8 +196,8 @@ design-system/
 
 - **Node.js**: ≥18.0.0
 - **Package Manager**: npm ≥8.0.0
-- **Development Server**: localhost:3004 (test-button.html, test-input.html, test-typography.html, test-card.html) ✅
-- **Storybook**: localhost:6006 (Button, Input, Typography, and Card component stories) ✅
+- **Development Server**: localhost:3004 (test-button.html, test-input.html, test-typography.html, test-card.html, test-select.html, test-checkbox.html) ✅
+- **Storybook**: localhost:6006 (Button, Input, Typography, Card, Select, and Checkbox component stories) ✅
 - **Build Pipeline**: Fully functional ✅
 
 ## Key Scripts
@@ -199,6 +251,12 @@ The pre-commit hooks will automatically:
 - `src/components/form/input.ts` - Complete Input component implementation
 - `src/components/form/input.test.ts` - Comprehensive Input test suite
 - `src/components/form/input.stories.ts` - Input Storybook stories
+- `src/components/form/select.ts` - Complete Select component implementation
+- `src/components/form/select.test.ts` - Comprehensive Select test suite
+- `src/components/form/select.stories.ts` - Select Storybook stories
+- `src/components/form/checkbox.ts` - Complete Checkbox component implementation
+- `src/components/form/checkbox.test.ts` - Comprehensive Checkbox test suite
+- `src/components/form/checkbox.stories.ts` - Checkbox Storybook stories
 - `src/components/content/typography.ts` - Complete Typography component implementation
 - `src/components/content/typography.test.ts` - Comprehensive Typography test suite
 - `src/components/content/typography.stories.ts` - Typography Storybook stories
@@ -207,6 +265,8 @@ The pre-commit hooks will automatically:
 - `src/components/content/card.stories.ts` - Card Storybook stories
 - `test-button.html` - Manual testing page for Button component
 - `test-input.html` - Manual testing page for Input component
+- `test-select.html` - Manual testing page for Select component
+- `test-checkbox.html` - Manual testing page for Checkbox component
 - `test-typography.html` - Manual testing page for Typography component
 - `test-card.html` - Manual testing page for Card component
 - `src/tokens/` - Design token system (colors, typography, spacing)
@@ -214,15 +274,13 @@ The pre-commit hooks will automatically:
 
 ## Next Steps
 
-### Immediate Next Component: Select Component
-**Priority**: Form dropdown component
+### Immediate Next Component: Radio Component
+**Priority**: Form input component
 **Features to implement**:
-- **Types**: single, multiple, searchable
 - **Sizes**: small, medium, large
-- **States**: default, focus, error, disabled, loading
-- **Options**: Support for option groups and custom options
+- **States**: default, focus, error, disabled
 - **Accessibility**: WCAG 2.1 AA compliant with proper labeling
-- **Events**: `ds-select-change`, `ds-select-focus`, `ds-select-blur`, `ds-select-open`, `ds-select-close`
+- **Events**: `ds-radio-change`, `ds-radio-focus`, `ds-radio-blur`
 - **Styling**: Consistent with established design tokens
 
 ### Implementation Guidelines
@@ -235,12 +293,12 @@ The pre-commit hooks will automatically:
 - Maintain performance budgets
 
 ### Future Components (in order)
-1. **Select Component** - Form dropdown ✅ (next)
-2. **Checkbox Component** - Form input
-3. **Radio Component** - Form input
+1. **Select Component** - Form dropdown ✅ (completed)
+2. **Checkbox Component** - Form input ✅ (completed)
+3. **Radio Component** - Form input ✅ (next)
 4. **Textarea Component** - Form input
 5. **Switch Component** - Form input
-6. **Continue with remaining 18 components**
+6. **Continue with remaining 17 components**
 
 ## Working Approach
 
@@ -273,8 +331,8 @@ The pre-commit hooks will automatically:
 
 ---
 
-**Last Updated**: After Card component implementation completion
-**Next Task**: Implement Select component following established patterns
+**Last Updated**: After Checkbox component implementation completion
+**Next Task**: Implement Radio component following established patterns
 
 ## Task 5.1 Completion Summary
 

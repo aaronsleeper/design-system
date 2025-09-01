@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select Component Test</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          sans-serif;
+        margin: 0;
+        padding: 2rem;
+        background-color: #f5f5f5;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid #007acc;
+        padding-bottom: 0.5rem;
+      }
+
+      h2 {
+        color: #555;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      h3 {
+        color: #666;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .section {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        background: #fafafa;
+      }
+
+      .example {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: white;
+      }
+
+      .example h4 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .example p {
+        margin: 0.5rem 0;
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .controls {
+        margin-top: 1rem;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .controls button {
+        padding: 0.5rem 1rem;
+        border: 1px solid #007acc;
+        background: #007acc;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+      }
+
+      .controls button:hover {
+        background: #005a9e;
+      }
+
+      .controls button.secondary {
+        background: white;
+        color: #007acc;
+      }
+
+      .controls button.secondary:hover {
+        background: #f0f8ff;
+      }
+
+      .event-log {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        max-height: 200px;
+        overflow-y: auto;
+        font-family: 'Courier New', monospace;
+        font-size: 0.8rem;
+      }
+
+      .event-log .event {
+        margin-bottom: 0.25rem;
+        padding: 0.25rem;
+        border-radius: 2px;
+      }
+
+      .event-log .event.change {
+        background: #d4edda;
+      }
+      .event-log .event.focus {
+        background: #cce5ff;
+      }
+      .event-log .event.blur {
+        background: #fff3cd;
+      }
+      .event-log .event.open {
+        background: #d1ecf1;
+      }
+      .event-log .event.close {
+        background: #f8d7da;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+      }
+
+      .form-example {
+        padding: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: white;
+      }
+
+      .form-example label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .form-example .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-example .help-text {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 0.25rem;
+      }
+
+      .form-example .error-text {
+        font-size: 0.8rem;
+        color: #dc3545;
+        margin-top: 0.25rem;
+      }
+
+      .form-example .success-text {
+        font-size: 0.8rem;
+        color: #28a745;
+        margin-top: 0.25rem;
+      }
+
+      .form-example button[type='submit'] {
+        background: #28a745;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+      }
+
+      .form-example button[type='submit']:hover {
+        background: #218838;
+      }
+
+      .form-example button[type='submit']:disabled {
+        background: #6c757d;
+        cursor: not-allowed;
+      }
+
+      .status {
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+
+      .status.valid {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .status.invalid {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .code-block {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        padding: 1rem;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+      }
+
+      .highlight {
+        background: #fff3cd;
+        padding: 0.25rem 0.5rem;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Select Component Test Page</h1>
+
+      <div class="section">
+        <h2>Basic Examples</h2>
+
+        <div class="example">
+          <h4>Single Selection</h4>
+          <p>Basic select with single option selection.</p>
+          <ds-select
+            id="single-select"
+            placeholder="Choose a fruit"
+            aria-label="Select a fruit"
+          ></ds-select>
+          <div class="controls">
+            <button onclick="openSelect('single-select')">Open</button>
+            <button onclick="closeSelect('single-select')">Close</button>
+            <button onclick="clearSelect('single-select')">Clear</button>
+            <button onclick="focusSelect('single-select')">Focus</button>
+          </div>
+          <div id="single-select-events" class="event-log"></div>
+        </div>
+
+        <div class="example">
+          <h4>Multiple Selection</h4>
+          <p>Select multiple options with checkboxes.</p>
+          <ds-select
+            id="multiple-select"
+            type="multiple"
+            placeholder="Choose multiple fruits"
+            aria-label="Select multiple fruits"
+          ></ds-select>
+          <div class="controls">
+            <button onclick="openSelect('multiple-select')">Open</button>
+            <button onclick="closeSelect('multiple-select')">Close</button>
+            <button onclick="clearSelect('multiple-select')">Clear</button>
+            <button onclick="focusSelect('multiple-select')">Focus</button>
+          </div>
+          <div id="multiple-select-events" class="event-log"></div>
+        </div>
+
+        <div class="example">
+          <h4>Searchable Selection</h4>
+          <p>Search and filter options by typing.</p>
+          <ds-select
+            id="searchable-select"
+            type="searchable"
+            placeholder="Search and select a fruit"
+            aria-label="Search and select a fruit"
+          ></ds-select>
+          <div class="controls">
+            <button onclick="openSelect('searchable-select')">Open</button>
+            <button onclick="closeSelect('searchable-select')">Close</button>
+            <button onclick="clearSelect('searchable-select')">Clear</button>
+            <button onclick="focusSelect('searchable-select')">Focus</button>
+          </div>
+          <div id="searchable-select-events" class="event-log"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Size Variants</h2>
+        <div class="grid">
+          <div class="example">
+            <h4>Small</h4>
+            <ds-select size="small" placeholder="Small select"></ds-select>
+          </div>
+          <div class="example">
+            <h4>Medium</h4>
+            <ds-select size="medium" placeholder="Medium select"></ds-select>
+          </div>
+          <div class="example">
+            <h4>Large</h4>
+            <ds-select size="large" placeholder="Large select"></ds-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Validation States</h2>
+        <div class="grid">
+          <div class="example">
+            <h4>Default</h4>
+            <ds-select placeholder="Default state"></ds-select>
+          </div>
+          <div class="example">
+            <h4>Error</h4>
+            <ds-select
+              placeholder="Error state"
+              validation-state="error"
+              error-message="Please select an option"
+            ></ds-select>
+          </div>
+          <div class="example">
+            <h4>Success</h4>
+            <ds-select
+              placeholder="Success state"
+              validation-state="success"
+              success-message="Selection is valid"
+              value="apple"
+            ></ds-select>
+          </div>
+          <div class="example">
+            <h4>Warning</h4>
+            <ds-select
+              placeholder="Warning state"
+              validation-state="warning"
+              warning-message="Consider other options"
+            ></ds-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Special States</h2>
+        <div class="grid">
+          <div class="example">
+            <h4>Loading</h4>
+            <ds-select placeholder="Loading options..." loading></ds-select>
+          </div>
+          <div class="example">
+            <h4>Disabled</h4>
+            <ds-select placeholder="Disabled select" disabled></ds-select>
+          </div>
+          <div class="example">
+            <h4>Clearable</h4>
+            <ds-select
+              placeholder="Clearable select"
+              clearable
+              value="apple"
+            ></ds-select>
+          </div>
+          <div class="example">
+            <h4>Required</h4>
+            <ds-select placeholder="Required select" required></ds-select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Option Groups</h2>
+        <div class="example">
+          <h4>Grouped Options</h4>
+          <p>Options organized into categories.</p>
+          <ds-select
+            id="grouped-select"
+            placeholder="Choose from categories"
+            aria-label="Select from categories"
+          ></ds-select>
+          <div class="controls">
+            <button onclick="openSelect('grouped-select')">Open</button>
+            <button onclick="closeSelect('grouped-select')">Close</button>
+            <button onclick="clearSelect('grouped-select')">Clear</button>
+          </div>
+          <div id="grouped-select-events" class="event-log"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Form Integration</h2>
+        <div class="form-example">
+          <h3>Product Configuration Form</h3>
+          <form id="test-form">
+            <div class="form-group">
+              <label for="category">Category *</label>
+              <ds-select
+                id="category"
+                placeholder="Select a category"
+                required
+                clearable
+              ></ds-select>
+              <div class="help-text">Choose the product category</div>
+            </div>
+
+            <div class="form-group">
+              <label for="features">Features</label>
+              <ds-select
+                id="features"
+                type="multiple"
+                placeholder="Select multiple features"
+                clearable
+              ></ds-select>
+              <div class="help-text">Select all applicable features</div>
+            </div>
+
+            <div class="form-group">
+              <label for="integration">Integration</label>
+              <ds-select
+                id="integration"
+                type="searchable"
+                placeholder="Search for integrations"
+                clearable
+              ></ds-select>
+              <div class="help-text">Search and select an integration</div>
+            </div>
+
+            <button type="submit">Submit Form</button>
+          </form>
+          <div id="form-status" class="status" style="display: none"></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Accessibility Testing</h2>
+        <div class="example">
+          <h4>Keyboard Navigation</h4>
+          <p>Test keyboard navigation with these keys:</p>
+          <ul>
+            <li><strong>Tab</strong> - Focus the select</li>
+            <li><strong>Enter/Space</strong> - Open dropdown</li>
+            <li><strong>Arrow Up/Down</strong> - Navigate options</li>
+            <li><strong>Enter</strong> - Select option</li>
+            <li><strong>Escape</strong> - Close dropdown</li>
+          </ul>
+          <ds-select
+            id="accessibility-select"
+            placeholder="Test keyboard navigation"
+            aria-label="Test keyboard navigation"
+          ></ds-select>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Code Examples</h2>
+        <h3>Basic Usage</h3>
+        <div class="code-block">
+          &lt;ds-select placeholder="Choose an option" .options="${options}"
+          &gt;&lt;/ds-select&gt;
+        </div>
+
+        <h3>Multiple Selection</h3>
+        <div class="code-block">
+          &lt;ds-select type="multiple" placeholder="Choose multiple options"
+          .options="${options}" &gt;&lt;/ds-select&gt;
+        </div>
+
+        <h3>Searchable Selection</h3>
+        <div class="code-block">
+          &lt;ds-select type="searchable" placeholder="Search and select"
+          .options="${options}" &gt;&lt;/ds-select&gt;
+        </div>
+
+        <h3>With Validation</h3>
+        <div class="code-block">
+          &lt;ds-select placeholder="Required field" required
+          validation-state="error" error-message="Please select an option"
+          .options="${options}" &gt;&lt;/ds-select&gt;
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Select } from './dist/design-system.esm.js';
+
+      // Mock data
+      const mockOptions = [
+        { value: 'apple', label: 'Apple' },
+        { value: 'banana', label: 'Banana' },
+        { value: 'cherry', label: 'Cherry' },
+        { value: 'date', label: 'Date' },
+        { value: 'elderberry', label: 'Elderberry' },
+        { value: 'fig', label: 'Fig' },
+        { value: 'grape', label: 'Grape' },
+        { value: 'honeydew', label: 'Honeydew' },
+        { value: 'kiwi', label: 'Kiwi' },
+        { value: 'lemon', label: 'Lemon' },
+      ];
+
+      const mockOptionGroups = [
+        {
+          label: 'Fruits',
+          options: [
+            { value: 'apple', label: 'Apple' },
+            { value: 'banana', label: 'Banana' },
+            { value: 'cherry', label: 'Cherry' },
+          ],
+        },
+        {
+          label: 'Vegetables',
+          options: [
+            { value: 'carrot', label: 'Carrot' },
+            { value: 'broccoli', label: 'Broccoli' },
+            { value: 'spinach', label: 'Spinach' },
+          ],
+        },
+        {
+          label: 'Grains',
+          options: [
+            { value: 'rice', label: 'Rice' },
+            { value: 'wheat', label: 'Wheat' },
+            { value: 'oats', label: 'Oats' },
+          ],
+        },
+      ];
+
+      const featureOptions = [
+        { value: 'feature1', label: 'Advanced Analytics' },
+        { value: 'feature2', label: 'Real-time Updates' },
+        { value: 'feature3', label: 'Custom Themes' },
+        { value: 'feature4', label: 'API Access' },
+        { value: 'feature5', label: 'Priority Support' },
+      ];
+
+      const integrationOptions = [
+        { value: 'google', label: 'Google Search' },
+        { value: 'bing', label: 'Bing Search' },
+        { value: 'elastic', label: 'Elasticsearch' },
+        { value: 'algolia', label: 'Algolia' },
+        { value: 'solr', label: 'Apache Solr' },
+      ];
+
+      // Initialize selects with options
+      document.addEventListener('DOMContentLoaded', () => {
+        // Basic selects
+        const singleSelect = document.getElementById('single-select');
+        const multipleSelect = document.getElementById('multiple-select');
+        const searchableSelect = document.getElementById('searchable-select');
+        const groupedSelect = document.getElementById('grouped-select');
+        const accessibilitySelect = document.getElementById(
+          'accessibility-select'
+        );
+
+        if (singleSelect) {
+          singleSelect.options = mockOptions;
+          setupEventLogging(singleSelect, 'single-select-events');
+        }
+
+        if (multipleSelect) {
+          multipleSelect.options = mockOptions;
+          setupEventLogging(multipleSelect, 'multiple-select-events');
+        }
+
+        if (searchableSelect) {
+          searchableSelect.options = mockOptions;
+          setupEventLogging(searchableSelect, 'searchable-select-events');
+        }
+
+        if (groupedSelect) {
+          groupedSelect.optionGroups = mockOptionGroups;
+          setupEventLogging(groupedSelect, 'grouped-select-events');
+        }
+
+        if (accessibilitySelect) {
+          accessibilitySelect.options = mockOptions;
+        }
+
+        // Form selects
+        const categorySelect = document.getElementById('category');
+        const featuresSelect = document.getElementById('features');
+        const integrationSelect = document.getElementById('integration');
+
+        if (categorySelect) {
+          categorySelect.optionGroups = mockOptionGroups;
+        }
+
+        if (featuresSelect) {
+          featuresSelect.options = featureOptions;
+        }
+
+        if (integrationSelect) {
+          integrationSelect.options = integrationOptions;
+        }
+
+        // Setup form submission
+        const form = document.getElementById('test-form');
+        if (form) {
+          form.addEventListener('submit', handleFormSubmit);
+        }
+      });
+
+      // Event logging
+      function setupEventLogging(select, logId) {
+        const log = document.getElementById(logId);
+        if (!log) return;
+
+        const events = ['change', 'focus', 'blur', 'open', 'close'];
+        events.forEach(eventType => {
+          select.addEventListener(`ds-select-${eventType}`, e => {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = `event ${eventType}`;
+            eventDiv.textContent = `${new Date().toLocaleTimeString()} - ${eventType.toUpperCase()}: ${JSON.stringify(
+              e.detail.data
+            )}`;
+            log.insertBefore(eventDiv, log.firstChild);
+
+            // Keep only last 10 events
+            while (log.children.length > 10) {
+              log.removeChild(log.lastChild);
+            }
+          });
+        });
+      }
+
+      // Control functions
+      window.openSelect = id => {
+        const select = document.getElementById(id);
+        if (select) select.open();
+      };
+
+      window.closeSelect = id => {
+        const select = document.getElementById(id);
+        if (select) select.close();
+      };
+
+      window.clearSelect = id => {
+        const select = document.getElementById(id);
+        if (select) select.clear();
+      };
+
+      window.focusSelect = id => {
+        const select = document.getElementById(id);
+        if (select) select.focus();
+      };
+
+      // Form handling
+      function handleFormSubmit(e) {
+        e.preventDefault();
+
+        const category = document.getElementById('category');
+        const features = document.getElementById('features');
+        const integration = document.getElementById('integration');
+        const status = document.getElementById('form-status');
+
+        const formData = {
+          category: category.value,
+          features: features.value,
+          integration: integration.value,
+        };
+
+        console.log('Form submitted:', formData);
+
+        // Simple validation
+        const isValid = category.value && category.value !== '';
+
+        if (status) {
+          status.style.display = 'block';
+          status.className = `status ${isValid ? 'valid' : 'invalid'}`;
+          status.textContent = isValid
+            ? 'Form is valid! Check console for data.'
+            : 'Please fill in all required fields.';
+        }
+      }
+    </script>
+  </body>
+</html>

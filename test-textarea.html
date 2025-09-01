@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textarea Component Test</title>
+    <link rel="stylesheet" href="./dist/assets/output.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .test-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .test-section h2 {
+            margin-top: 0;
+            color: #1f2937;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+        }
+
+        .test-section h3 {
+            color: #374151;
+            margin-top: 2rem;
+        }
+
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .test-item {
+            padding: 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+        }
+
+        .test-item h4 {
+            margin-top: 0;
+            color: #1f2937;
+        }
+
+        .test-item p {
+            margin: 0.5rem 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .event-log {
+            background: #1f2937;
+            color: #f9fafb;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.75rem;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+
+        .event-log h4 {
+            margin-top: 0;
+            color: #60a5fa;
+        }
+
+        .event-entry {
+            margin: 0.25rem 0;
+            padding: 0.25rem;
+            border-left: 2px solid #3b82f6;
+            padding-left: 0.5rem;
+        }
+
+        .form-example {
+            max-width: 600px;
+            margin: 2rem 0;
+        }
+
+        .form-example .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-example label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .form-example .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .accessibility-info {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .accessibility-info h4 {
+            margin-top: 0;
+            color: #92400e;
+        }
+
+        .accessibility-info ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .accessibility-info li {
+            margin: 0.25rem 0;
+            color: #92400e;
+        }
+
+        .performance-info {
+            background: #dbeafe;
+            border: 1px solid #3b82f6;
+            border-radius: 6px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .performance-info h4 {
+            margin-top: 0;
+            color: #1e40af;
+        }
+
+        .performance-info p {
+            margin: 0.5rem 0;
+            color: #1e40af;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .theme-toggle:hover {
+            background: #2563eb;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #111827;
+                color: #f9fafb;
+            }
+
+            .test-section {
+                background: #1f2937;
+                border-color: #374151;
+            }
+
+            .test-section h2 {
+                color: #f9fafb;
+                border-color: #60a5fa;
+            }
+
+            .test-section h3 {
+                color: #d1d5db;
+            }
+
+            .test-item {
+                background: #374151;
+                border-color: #4b5563;
+            }
+
+            .test-item h4 {
+                color: #f9fafb;
+            }
+
+            .test-item p {
+                color: #9ca3af;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+
+    <h1>Textarea Component Test Suite</h1>
+    <p>Comprehensive testing page for the Textarea component with all features, states, and accessibility features.</p>
+
+    <!-- Basic Examples -->
+    <div class="test-section">
+        <h2>Basic Examples</h2>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <h4>Default Textarea</h4>
+                <p>Basic textarea with default settings</p>
+                <ds-textarea placeholder="Enter your message..."></ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>With Value</h4>
+                <p>Textarea with pre-filled content</p>
+                <ds-textarea value="This is some pre-filled content that demonstrates how the textarea looks with existing text."></ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>With Placeholder</h4>
+                <p>Textarea with placeholder text</p>
+                <ds-textarea placeholder="Type your message here..."></ds-textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Size Variants -->
+    <div class="test-section">
+        <h2>Size Variants</h2>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <h4>Small Size</h4>
+                <p>Compact textarea for limited space</p>
+                <ds-textarea size="small" placeholder="Small textarea"></ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Medium Size</h4>
+                <p>Standard textarea size (default)</p>
+                <ds-textarea size="medium" placeholder="Medium textarea"></ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Large Size</h4>
+                <p>Larger textarea for emphasis</p>
+                <ds-textarea size="large" placeholder="Large textarea"></ds-textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Validation States -->
+    <div class="test-section">
+        <h2>Validation States</h2>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <h4>Error State</h4>
+                <p>Textarea with error validation</p>
+                <ds-textarea 
+                    validation-state="error" 
+                    error-message="This field is required"
+                    placeholder="Enter your message">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Success State</h4>
+                <p>Textarea with success validation</p>
+                <ds-textarea 
+                    validation-state="success" 
+                    success-message="Message looks good!"
+                    value="This is a valid message"
+                    placeholder="Enter your message">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Warning State</h4>
+                <p>Textarea with warning validation</p>
+                <ds-textarea 
+                    validation-state="warning" 
+                    warning-message="Please review your message"
+                    value="This might need review"
+                    placeholder="Enter your message">
+                </ds-textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Features -->
+    <div class="test-section">
+        <h2>Interactive Features</h2>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <h4>Character Count</h4>
+                <p>Textarea with character limit and count</p>
+                <ds-textarea 
+                    maxlength="100" 
+                    placeholder="Enter your message (max 100 characters)">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Required Field</h4>
+                <p>Required textarea with validation</p>
+                <ds-textarea 
+                    required 
+                    placeholder="This field is required">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Min/Max Length</h4>
+                <p>Textarea with minimum and maximum length</p>
+                <ds-textarea 
+                    minlength="10" 
+                    maxlength="200" 
+                    placeholder="Enter 10-200 characters">
+                </ds-textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- States -->
+    <div class="test-section">
+        <h2>Component States</h2>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <h4>Disabled</h4>
+                <p>Disabled textarea (not interactive)</p>
+                <ds-textarea 
+                    disabled 
+                    value="This textarea is disabled">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Read Only</h4>
+                <p>Read-only textarea (not editable)</p>
+                <ds-textarea 
+                    readonly 
+                    value="This textarea is read-only">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Focus State</h4>
+                <p>Click to see focus styling</p>
+                <ds-textarea 
+                    placeholder="Click to focus">
+                </ds-textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Textarea Attributes -->
+    <div class="test-section">
+        <h2>Textarea Attributes</h2>
+        
+        <div class="test-grid">
+            <div class="test-item">
+                <h4>Custom Rows</h4>
+                <p>Textarea with 5 rows</p>
+                <ds-textarea 
+                    rows="5" 
+                    placeholder="This textarea has 5 rows">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Custom Columns</h4>
+                <p>Textarea with 50 columns</p>
+                <ds-textarea 
+                    cols="50" 
+                    placeholder="This textarea has 50 columns">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>No Spellcheck</h4>
+                <p>Textarea with spellcheck disabled</p>
+                <ds-textarea 
+                    spellcheck="false" 
+                    placeholder="Spellcheck is disabled">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>Hard Wrap</h4>
+                <p>Textarea with hard text wrapping</p>
+                <ds-textarea 
+                    wrap="hard" 
+                    placeholder="Text will wrap with line breaks">
+                </ds-textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Handling -->
+    <div class="test-section">
+        <h2>Event Handling</h2>
+        
+        <div class="test-item">
+            <h4>Interactive Event Log</h4>
+            <p>Type in the textarea below to see events in real-time</p>
+            <ds-textarea 
+                id="event-textarea"
+                placeholder="Type something to see events..."
+                maxlength="50">
+            </ds-textarea>
+            
+            <div class="event-log">
+                <h4>Event Log:</h4>
+                <div id="events"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Integration -->
+    <div class="test-section">
+        <h2>Form Integration</h2>
+        
+        <div class="form-example">
+            <h3>Contact Form Example</h3>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <ds-input
+                        id="name"
+                        name="name"
+                        placeholder="Your full name"
+                        required
+                        size="large">
+                    </ds-input>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <ds-input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="your@email.com"
+                        required
+                        size="large">
+                    </ds-input>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <ds-input
+                        id="subject"
+                        name="subject"
+                        placeholder="What's this about?"
+                        size="large">
+                    </ds-input>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <ds-textarea
+                        id="message"
+                        name="message"
+                        placeholder="Tell us more about your inquiry..."
+                        rows="6"
+                        maxlength="1000"
+                        required
+                        size="large">
+                    </ds-textarea>
+                </div>
+                
+                <div class="form-group">
+                    <ds-button type="submit" variant="primary" size="large">
+                        Send Message
+                    </ds-button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Accessibility Features -->
+    <div class="test-section">
+        <h2>Accessibility Features</h2>
+        
+        <div class="accessibility-info">
+            <h4>WCAG 2.1 AA Compliance</h4>
+            <ul>
+                <li>✅ Proper ARIA attributes (aria-label, aria-describedby, aria-invalid)</li>
+                <li>✅ Keyboard navigation support</li>
+                <li>✅ Screen reader announcements</li>
+                <li>✅ Focus management and visible focus indicators</li>
+                <li>✅ Color contrast compliance</li>
+                <li>✅ Required field indicators</li>
+                <li>✅ Validation message announcements</li>
+            </ul>
+        </div>
+
+        <div class="test-grid">
+            <div class="test-item">
+                <h4>With ARIA Label</h4>
+                <p>Textarea with accessible label</p>
+                <ds-textarea 
+                    aria-label="Message input field"
+                    placeholder="Enter your message">
+                </ds-textarea>
+            </div>
+
+            <div class="test-item">
+                <h4>With ARIA Described By</h4>
+                <p>Textarea with description reference</p>
+                <ds-textarea 
+                    aria-describedby="message-help"
+                    placeholder="Enter your message">
+                </ds-textarea>
+                <div id="message-help" style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">
+                    Please provide a detailed message
+                </div>
+            </div>
+
+            <div class="test-item">
+                <h4>Required with Indicator</h4>
+                <p>Required textarea with screen reader support</p>
+                <ds-textarea 
+                    required
+                    aria-label="Required message field"
+                    placeholder="This field is required">
+                </ds-textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Information -->
+    <div class="test-section">
+        <h2>Performance Information</h2>
+        
+        <div class="performance-info">
+            <h4>Performance Characteristics</h4>
+            <p><strong>Bundle Size:</strong> Minimal impact on bundle size</p>
+            <p><strong>Rendering:</strong> Optimized for fast initial render</p>
+            <p><strong>Memory Usage:</strong> Efficient memory management</p>
+            <p><strong>Event Handling:</strong> Debounced input events for performance</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import './dist/design-system.esm.js';
+
+        // Event logging
+        const textarea = document.getElementById('event-textarea');
+        const eventsDiv = document.getElementById('events');
+        
+        const logEvent = (eventName, detail) => {
+            const eventDiv = document.createElement('div');
+            eventDiv.className = 'event-entry';
+            eventDiv.innerHTML = `
+                <strong>${new Date().toLocaleTimeString()}: ${eventName}</strong>
+                ${detail ? `<br><span style="color: #9ca3af;">Value: "${detail.data?.value || ''}"</span>` : ''}
+            `;
+            eventsDiv.appendChild(eventDiv);
+            eventsDiv.scrollTop = eventsDiv.scrollHeight;
+        };
+        
+        if (textarea) {
+            textarea.addEventListener('ds-textarea-change', (e) => logEvent('change', e.detail));
+            textarea.addEventListener('ds-textarea-focus', (e) => logEvent('focus', e.detail));
+            textarea.addEventListener('ds-textarea-blur', (e) => logEvent('blur', e.detail));
+            textarea.addEventListener('ds-textarea-validate', (e) => logEvent('validate', e.detail));
+        }
+
+        // Form handling
+        const form = document.getElementById('contact-form');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData.entries());
+                console.log('Form submitted:', data);
+                alert('Form submitted! Check console for data.');
+            });
+        }
+
+        // Theme toggle
+        window.toggleTheme = () => {
+            document.body.classList.toggle('dark-theme');
+        };
+    </script>
+</body>
+</html>

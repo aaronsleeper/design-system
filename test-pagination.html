@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pagination Component Test</title>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 2rem;
+        background-color: #f5f5f5;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .test-section {
+        margin-bottom: 3rem;
+        padding: 1.5rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        background: #fafafa;
+      }
+
+      .test-section h2 {
+        color: #555;
+        margin-top: 0;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+      }
+
+      .test-section h3 {
+        color: #666;
+        margin-top: 1.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .pagination-demo {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: white;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+
+      .controls {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f0f0f0;
+        border-radius: 4px;
+      }
+
+      .controls label {
+        display: inline-block;
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+
+      .controls input,
+      .controls select {
+        margin-right: 1rem;
+        margin-bottom: 0.5rem;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      .controls button {
+        margin-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      .controls button:hover {
+        background: #0056b3;
+      }
+
+      .event-log {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.875rem;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      .event-log h4 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        color: #495057;
+      }
+
+      .event-entry {
+        margin-bottom: 0.25rem;
+        padding: 0.25rem;
+        background: white;
+        border-radius: 2px;
+        border-left: 3px solid #007bff;
+      }
+
+      .event-entry.navigate {
+        border-left-color: #28a745;
+      }
+
+      .event-entry.focus {
+        border-left-color: #ffc107;
+      }
+
+      .event-entry.blur {
+        border-left-color: #6c757d;
+      }
+
+      .event-entry.render {
+        border-left-color: #17a2b8;
+      }
+
+      .code-example {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 4px;
+        font-family: monospace;
+        font-size: 0.875rem;
+        overflow-x: auto;
+      }
+
+      .accessibility-info {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #e7f3ff;
+        border: 1px solid #b3d9ff;
+        border-radius: 4px;
+      }
+
+      .accessibility-info h4 {
+        margin-top: 0;
+        color: #0066cc;
+      }
+
+      .accessibility-info ul {
+        margin-bottom: 0;
+      }
+
+      .accessibility-info li {
+        margin-bottom: 0.25rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Pagination Component Test</h1>
+
+      <!-- Basic Examples -->
+      <div class="test-section">
+        <h2>Basic Examples</h2>
+
+        <h3>Default Pagination</h3>
+        <div class="pagination-demo">
+          <ds-pagination current-page="3" total-pages="10"></ds-pagination>
+        </div>
+
+        <h3>With First/Last Buttons</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            current-page="5"
+            total-pages="20"
+            show-first-last
+          ></ds-pagination>
+        </div>
+
+        <h3>Large Dataset with Ellipsis</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            current-page="10"
+            total-pages="50"
+            max-visible-pages="7"
+          ></ds-pagination>
+        </div>
+      </div>
+
+      <!-- Variants -->
+      <div class="test-section">
+        <h2>Variants</h2>
+
+        <h3>Default Variant</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            variant="default"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+
+        <h3>Minimal Variant</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            variant="minimal"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+
+        <h3>Compact Variant</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            variant="compact"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+      </div>
+
+      <!-- Sizes -->
+      <div class="test-section">
+        <h2>Sizes</h2>
+
+        <h3>Small Size</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            size="small"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+
+        <h3>Medium Size</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            size="medium"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+
+        <h3>Large Size</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            size="large"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+      </div>
+
+      <!-- Interactive Demo -->
+      <div class="test-section">
+        <h2>Interactive Demo</h2>
+
+        <div class="controls">
+          <label
+            >Current Page:
+            <input type="number" id="currentPage" value="3" min="1" max="20"
+          /></label>
+          <label
+            >Total Pages:
+            <input type="number" id="totalPages" value="20" min="1" max="100"
+          /></label>
+          <label
+            >Variant:
+            <select id="variant">
+              <option value="default">Default</option>
+              <option value="minimal">Minimal</option>
+              <option value="compact">Compact</option>
+            </select>
+          </label>
+          <label
+            >Size:
+            <select id="size">
+              <option value="small">Small</option>
+              <option value="medium" selected>Medium</option>
+              <option value="large">Large</option>
+            </select>
+          </label>
+          <label
+            >Max Visible Pages:
+            <input
+              type="number"
+              id="maxVisiblePages"
+              value="7"
+              min="3"
+              max="15"
+          /></label>
+          <br />
+          <label
+            ><input type="checkbox" id="showFirstLast" /> Show First/Last</label
+          >
+          <label
+            ><input type="checkbox" id="showPreviousNext" checked /> Show
+            Previous/Next</label
+          >
+          <label><input type="checkbox" id="disabled" /> Disabled</label>
+          <br />
+          <button onclick="updatePagination()">Update Pagination</button>
+          <button onclick="clearEventLog()">Clear Event Log</button>
+        </div>
+
+        <div class="pagination-demo">
+          <ds-pagination
+            id="interactivePagination"
+            current-page="3"
+            total-pages="20"
+            show-first-last
+            @ds-pagination-navigate="handleNavigate"
+            @ds-pagination-focus="handleFocus"
+            @ds-pagination-blur="handleBlur"
+            @ds-pagination-render="handleRender"
+          ></ds-pagination>
+        </div>
+
+        <div class="event-log">
+          <h4>Event Log</h4>
+          <div id="eventLog"></div>
+        </div>
+      </div>
+
+      <!-- Public Methods Demo -->
+      <div class="test-section">
+        <h2>Public Methods Demo</h2>
+
+        <div class="controls">
+          <button onclick="goToPage(1)">Go to Page 1</button>
+          <button onclick="goToPage(5)">Go to Page 5</button>
+          <button onclick="goToPage(10)">Go to Page 10</button>
+          <button onclick="goToPage(20)">Go to Page 20</button>
+          <br />
+          <button onclick="previousPage()">Previous Page</button>
+          <button onclick="nextPage()">Next Page</button>
+          <button onclick="firstPage()">First Page</button>
+          <button onclick="lastPage()">Last Page</button>
+          <br />
+          <button onclick="getPaginationInfo()">Get Pagination Info</button>
+          <button onclick="getDimensions()">Get Dimensions</button>
+        </div>
+
+        <div class="pagination-demo">
+          <ds-pagination
+            id="methodsPagination"
+            current-page="5"
+            total-pages="20"
+            show-first-last
+          ></ds-pagination>
+        </div>
+
+        <div class="event-log">
+          <h4>Method Results</h4>
+          <div id="methodResults"></div>
+        </div>
+      </div>
+
+      <!-- Accessibility Info -->
+      <div class="test-section">
+        <h2>Accessibility Features</h2>
+
+        <div class="accessibility-info">
+          <h4>Keyboard Navigation</h4>
+          <ul>
+            <li>Use <strong>Tab</strong> to focus the pagination component</li>
+            <li>
+              Use <strong>Tab</strong> to navigate between pagination buttons
+            </li>
+            <li>
+              Press <strong>Enter</strong> or <strong>Space</strong> to activate
+              buttons
+            </li>
+            <li>All buttons have proper ARIA labels for screen readers</li>
+          </ul>
+        </div>
+
+        <div class="accessibility-info">
+          <h4>Screen Reader Support</h4>
+          <ul>
+            <li>Navigation role with proper aria-label</li>
+            <li>Current page marked with aria-current="page"</li>
+            <li>Descriptive aria-labels for all buttons</li>
+            <li>Support for aria-describedby for additional context</li>
+          </ul>
+        </div>
+
+        <h3>With Custom ARIA Label</h3>
+        <div class="pagination-demo">
+          <ds-pagination
+            aria-label="Product search results pagination"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+
+        <h3>With ARIA Described By</h3>
+        <div class="pagination-demo">
+          <p id="pagination-desc">
+            This pagination shows 10 results per page. Use the navigation
+            buttons to browse through all results.
+          </p>
+          <ds-pagination
+            aria-describedby="pagination-desc"
+            current-page="3"
+            total-pages="10"
+          ></ds-pagination>
+        </div>
+      </div>
+
+      <!-- Code Examples -->
+      <div class="test-section">
+        <h2>Code Examples</h2>
+
+        <h3>Basic Usage</h3>
+        <div class="code-example">
+          &lt;ds-pagination current-page="3" total-pages="10"
+          &gt;&lt;/ds-pagination&gt;
+        </div>
+
+        <h3>With All Options</h3>
+        <div class="code-example">
+          &lt;ds-pagination variant="minimal" size="large" current-page="5"
+          total-pages="20" show-first-last max-visible-pages="5"
+          aria-label="Custom pagination" &gt;&lt;/ds-pagination&gt;
+        </div>
+
+        <h3>With Total Items</h3>
+        <div class="code-example">
+          &lt;ds-pagination current-page="3" total-items="100"
+          items-per-page="10" &gt;&lt;/ds-pagination&gt;
+        </div>
+
+        <h3>Event Handling</h3>
+        <div class="code-example">
+          &lt;ds-pagination current-page="3" total-pages="10"
+          @ds-pagination-navigate="handleNavigate" &gt;&lt;/ds-pagination&gt;
+          &lt;script&gt; function handleNavigate(event) { console.log('Navigate
+          to page:', event.detail.data.page); } &lt;/script&gt;
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { Pagination } from './dist/components/content/pagination.js';
+
+      // Make Pagination available globally for testing
+      window.Pagination = Pagination;
+
+      // Event handlers
+      function handleNavigate(event) {
+        logEvent(
+          'navigate',
+          `Navigate to page ${event.detail.data.page} (${event.detail.data.type})`,
+          event.detail
+        );
+      }
+
+      function handleFocus(event) {
+        logEvent('focus', 'Pagination focused', event.detail);
+      }
+
+      function handleBlur(event) {
+        logEvent('blur', 'Pagination blurred', event.detail);
+      }
+
+      function handleRender(event) {
+        logEvent('render', 'Pagination rendered', event.detail);
+      }
+
+      function logEvent(type, message, detail) {
+        const eventLog = document.getElementById('eventLog');
+        const entry = document.createElement('div');
+        entry.className = `event-entry ${type}`;
+        entry.innerHTML = `
+                <strong>${new Date().toLocaleTimeString()}</strong> - ${message}
+                <br><small>${JSON.stringify(detail, null, 2)}</small>
+            `;
+        eventLog.insertBefore(entry, eventLog.firstChild);
+
+        // Keep only last 10 entries
+        while (eventLog.children.length > 10) {
+          eventLog.removeChild(eventLog.lastChild);
+        }
+      }
+
+      function clearEventLog() {
+        document.getElementById('eventLog').innerHTML = '';
+      }
+
+      function updatePagination() {
+        const pagination = document.getElementById('interactivePagination');
+        const currentPage = parseInt(
+          document.getElementById('currentPage').value
+        );
+        const totalPages = parseInt(
+          document.getElementById('totalPages').value
+        );
+        const variant = document.getElementById('variant').value;
+        const size = document.getElementById('size').value;
+        const maxVisiblePages = parseInt(
+          document.getElementById('maxVisiblePages').value
+        );
+        const showFirstLast = document.getElementById('showFirstLast').checked;
+        const showPreviousNext =
+          document.getElementById('showPreviousNext').checked;
+        const disabled = document.getElementById('disabled').checked;
+
+        pagination.currentPage = currentPage;
+        pagination.totalPages = totalPages;
+        pagination.variant = variant;
+        pagination.size = size;
+        pagination.maxVisiblePages = maxVisiblePages;
+        pagination.showFirstLast = showFirstLast;
+        pagination.showPreviousNext = showPreviousNext;
+        pagination.disabled = disabled;
+      }
+
+      // Public methods demo
+      function goToPage(page) {
+        const pagination = document.getElementById('methodsPagination');
+        pagination.goToPage(page);
+        logMethodResult(
+          `goToPage(${page})`,
+          `Current page: ${pagination.currentPage}`
+        );
+      }
+
+      function previousPage() {
+        const pagination = document.getElementById('methodsPagination');
+        pagination.previousPage();
+        logMethodResult(
+          'previousPage()',
+          `Current page: ${pagination.currentPage}`
+        );
+      }
+
+      function nextPage() {
+        const pagination = document.getElementById('methodsPagination');
+        pagination.nextPage();
+        logMethodResult(
+          'nextPage()',
+          `Current page: ${pagination.currentPage}`
+        );
+      }
+
+      function firstPage() {
+        const pagination = document.getElementById('methodsPagination');
+        pagination.firstPage();
+        logMethodResult(
+          'firstPage()',
+          `Current page: ${pagination.currentPage}`
+        );
+      }
+
+      function lastPage() {
+        const pagination = document.getElementById('methodsPagination');
+        pagination.lastPage();
+        logMethodResult(
+          'lastPage()',
+          `Current page: ${pagination.currentPage}`
+        );
+      }
+
+      function getPaginationInfo() {
+        const pagination = document.getElementById('methodsPagination');
+        const info = pagination.getPaginationInfo();
+        logMethodResult('getPaginationInfo()', JSON.stringify(info, null, 2));
+      }
+
+      function getDimensions() {
+        const pagination = document.getElementById('methodsPagination');
+        const dimensions = pagination.getDimensions();
+        logMethodResult('getDimensions()', JSON.stringify(dimensions, null, 2));
+      }
+
+      function logMethodResult(method, result) {
+        const methodResults = document.getElementById('methodResults');
+        const entry = document.createElement('div');
+        entry.className = 'event-entry';
+        entry.innerHTML = `
+                <strong>${new Date().toLocaleTimeString()}</strong> - ${method}
+                <br><small>${result}</small>
+            `;
+        methodResults.insertBefore(entry, methodResults.firstChild);
+
+        // Keep only last 10 entries
+        while (methodResults.children.length > 10) {
+          methodResults.removeChild(methodResults.lastChild);
+        }
+      }
+
+      // Make functions globally available
+      window.handleNavigate = handleNavigate;
+      window.handleFocus = handleFocus;
+      window.handleBlur = handleBlur;
+      window.handleRender = handleRender;
+      window.clearEventLog = clearEventLog;
+      window.updatePagination = updatePagination;
+      window.goToPage = goToPage;
+      window.previousPage = previousPage;
+      window.nextPage = nextPage;
+      window.firstPage = firstPage;
+      window.lastPage = lastPage;
+      window.getPaginationInfo = getPaginationInfo;
+      window.getDimensions = getDimensions;
+    </script>
+  </body>
+</html>

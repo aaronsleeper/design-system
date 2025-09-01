@@ -8,3 +8,5 @@ export * from './typography-utils';
 export * from './lighting-utils';
 export * from './browser-compatibility';
 export * from './event-utils';
+export * from './maintenance-utils';
+export * from './maintenance-config';

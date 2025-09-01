@@ -18,7 +18,7 @@ const config = {
     config.css = {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "src/tokens/index.scss";`,
+          sourceMap: true,
         },
       },
     };

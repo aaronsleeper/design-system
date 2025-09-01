@@ -9,7 +9,6 @@ export default defineConfig({
 	css: {
 		preprocessorOptions: {
 			scss: {
-				additionalData: `@import "src/tokens/index.scss";`,
 				sourceMap: true,
 			},
 		},

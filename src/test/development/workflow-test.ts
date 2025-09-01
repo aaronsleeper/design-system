@@ -103,7 +103,7 @@ export class WorkflowTest extends LitElement {
       this.monitorComponentChanges();
     } else {
       // In test environment, set default values
-      this.hotReloadActive = process.env['NODE_ENV'] === 'development';
+      this.hotReloadActive = import.meta.env.DEV;
       this.status = this.hotReloadActive
         ? 'hot-reload-active'
         : 'production-mode';
@@ -112,7 +112,7 @@ export class WorkflowTest extends LitElement {
 
   private detectHotReload() {
     // Check if we're in a development environment
-    const isDev = process.env['NODE_ENV'] === 'development';
+    const isDev = import.meta.env.DEV;
 
     if (isDev) {
       this.hotReloadActive = true;
@@ -134,7 +134,7 @@ export class WorkflowTest extends LitElement {
     const tests = [
       {
         name: 'Vite Development Server',
-        test: () => process.env['NODE_ENV'] === 'development',
+        test: () => import.meta.env.DEV,
         expected: true,
       },
       {
@@ -219,10 +219,7 @@ export class WorkflowTest extends LitElement {
         <div class="test-result info">Reload Count: ${this.reloadCount}</div>
 
         <div class="test-result info">
-          Environment:
-          ${process.env['NODE_ENV'] === 'development'
-            ? 'Development'
-            : 'Production'}
+          Environment: ${import.meta.env.DEV ? 'Development' : 'Production'}
         </div>
 
         <div class="test-result info">

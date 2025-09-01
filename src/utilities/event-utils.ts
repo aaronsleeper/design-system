@@ -5,7 +5,7 @@
 /**
  * Debounces a function call.
  * Useful for optimizing frequent events like input changes.
- * 
+ *
  * @param func - The function to debounce
  * @param delay - The delay in milliseconds
  * @returns A debounced version of the function
@@ -14,8 +14,8 @@ export function debounce<T extends (...args: any[]) => any>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {
-  let timeoutId: NodeJS.Timeout;
-  
+  let timeoutId: number;
+
   return (...args: Parameters<T>) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func(...args), delay);
@@ -25,7 +25,7 @@ export function debounce<T extends (...args: any[]) => any>(
 /**
  * Throttles a function call.
  * Useful for optimizing frequent events like scroll or resize.
- * 
+ *
  * @param func - The function to throttle
  * @param delay - The delay in milliseconds
  * @returns A throttled version of the function
@@ -35,7 +35,7 @@ export function throttle<T extends (...args: any[]) => any>(
   delay: number
 ): (...args: Parameters<T>) => void {
   let lastCall = 0;
-  
+
   return (...args: Parameters<T>) => {
     const now = Date.now();
     if (now - lastCall >= delay) {
@@ -47,7 +47,7 @@ export function throttle<T extends (...args: any[]) => any>(
 
 /**
  * Creates an event listener with automatic cleanup.
- * 
+ *
  * @param target - The target element to listen to
  * @param eventName - The event name to listen for
  * @param handler - The event handler function
@@ -61,7 +61,7 @@ export function createEventListener(
   options?: AddEventListenerOptions
 ): () => void {
   target.addEventListener(eventName, handler, options);
-  
+
   return () => {
     target.removeEventListener(eventName, handler, options);
   };
@@ -69,7 +69,7 @@ export function createEventListener(
 
 /**
  * Waits for a specific event to occur.
- * 
+ *
  * @param target - The target element to listen to
  * @param eventName - The event name to wait for
  * @param timeout - Timeout in milliseconds (default: 5000)
@@ -96,7 +96,7 @@ export function waitForEvent(
 
 /**
  * Dispatches a custom event with standardized payload.
- * 
+ *
  * @param target - The target element to dispatch the event on
  * @param eventName - The name of the event
  * @param data - Event-specific data
@@ -133,7 +133,7 @@ export class EventBus {
 
   /**
    * Registers an event listener.
-   * 
+   *
    * @param eventName - The event name to listen for
    * @param callback - The callback function
    */
@@ -146,7 +146,7 @@ export class EventBus {
 
   /**
    * Removes an event listener.
-   * 
+   *
    * @param eventName - The event name
    * @param callback - The callback function to remove
    */
@@ -159,7 +159,7 @@ export class EventBus {
 
   /**
    * Emits an event to all registered listeners.
-   * 
+   *
    * @param eventName - The event name
    * @param data - The event data
    */
@@ -172,7 +172,7 @@ export class EventBus {
 
   /**
    * Removes all listeners for a specific event.
-   * 
+   *
    * @param eventName - The event name
    */
   removeAllListeners(eventName: string): void {
@@ -194,7 +194,7 @@ export const globalEventBus = new EventBus();
 
 /**
  * Announces a message to screen readers.
- * 
+ *
  * @param message - The message to announce
  * @param priority - The announcement priority ('polite' or 'assertive')
  */
@@ -207,9 +207,9 @@ export function announceToScreenReader(
   announcement.setAttribute('aria-atomic', 'true');
   announcement.className = 'sr-only';
   announcement.textContent = message;
-  
+
   document.body.appendChild(announcement);
-  
+
   setTimeout(() => {
     if (document.body.contains(announcement)) {
       document.body.removeChild(announcement);
@@ -219,17 +219,20 @@ export function announceToScreenReader(
 
 /**
  * Checks if an element is currently focused.
- * 
+ *
  * @param element - The element to check
  * @returns True if the element is focused
  */
 export function isElementFocused(element: Element): boolean {
-  return element === document.activeElement || element.contains(document.activeElement);
+  return (
+    element === document.activeElement ||
+    element.contains(document.activeElement)
+  );
 }
 
 /**
  * Checks if an element is currently visible in the viewport.
- * 
+ *
  * @param element - The element to check
  * @returns True if the element is visible
  */
@@ -238,14 +241,15 @@ export function isElementVisible(element: Element): boolean {
   return (
     rect.top >= 0 &&
     rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.bottom <=
+      (window.innerHeight || document.documentElement.clientHeight) &&
     rect.right <= (window.innerWidth || document.documentElement.clientWidth)
   );
 }
 
 /**
  * Validates that a value is within a specified range.
- * 
+ *
  * @param value - The value to validate
  * @param min - Minimum allowed value
  * @param max - Maximum allowed value
@@ -261,17 +265,17 @@ export function validateRange(
   if (value >= min && value <= max) {
     return value;
   }
-  
+
   console.warn(
     `Value ${value} is outside valid range [${min}, ${max}]. Using default value ${defaultValue}.`
   );
-  
+
   return defaultValue;
 }
 
 /**
  * Validates that a value is one of the allowed values.
- * 
+ *
  * @param value - The value to validate
  * @param allowedValues - Array of allowed values
  * @param defaultValue - Default value if validation fails
@@ -285,10 +289,12 @@ export function validateEnum<T>(
   if (allowedValues.includes(value)) {
     return value;
   }
-  
+
   console.warn(
-    `Value ${value} is not allowed. Allowed values: ${allowedValues.join(', ')}. Using default value ${defaultValue}.`
+    `Value ${value} is not allowed. Allowed values: ${allowedValues.join(
+      ', '
+    )}. Using default value ${defaultValue}.`
   );
-  
+
   return defaultValue;
 }

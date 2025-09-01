@@ -7,6 +7,7 @@
 - **Mark blockers** immediately if encountered
 - **Update task status** as you progress
 - **Create new files** for each planning deliverable
+- **Commit and push to remote after every task completion**
 
 ## Task Status Legend
 

@@ -87,6 +87,19 @@ npm run format                 # Format all files
 npm run format:check           # Check formatting
 ```
 
+## Git Workflow
+
+After completing each task:
+
+1. **Stage changes**: `git add .`
+2. **Commit with descriptive message**: `git commit -m "feat: Complete Task X.X - Description"`
+3. **Push to remote**: `git push origin main`
+
+The pre-commit hooks will automatically:
+- Format code with Prettier
+- Lint code with ESLint
+- Ensure code quality before commit
+
 ## Important Decisions
 
 - Font sizes: font-size-1, font-size-2, etc. (not font-xs, font-sm)
@@ -120,6 +133,7 @@ npm run format:check           # Check formatting
 - Test thoroughly
 - Maintain consistency with established patterns
 - Update task status in planning document
+- **Commit and push to remote after every task completion**
 
 ## Build Status
 

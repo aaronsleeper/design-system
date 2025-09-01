@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Component Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+        
+        .section h2 {
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            opacity: 0.8;
+        }
+        
+        .btn-success { background: #22c55e; color: white; }
+        .btn-warning { background: #f59e0b; color: white; }
+        .btn-error { background: #ef4444; color: white; }
+        .btn-info { background: #3b82f6; color: white; }
+        .btn-default { background: #6b7280; color: white; }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        select, input {
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            margin: 0;
+        }
+        
+        .toast-demo {
+            position: relative;
+            height: 200px;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-style: italic;
+        }
+        
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .status.success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+        .status.error { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .status.info { background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Toast Component Test</h1>
+        
+        <!-- Basic Variants -->
+        <div class="section">
+            <h2>Basic Variants</h2>
+            <p>Test different toast variants and their visual appearance.</p>
+            <div class="button-group">
+                <button class="btn-default" onclick="showToast('default', 'Default toast message')">Default</button>
+                <button class="btn-success" onclick="showToast('success', 'Success! Operation completed successfully.')">Success</button>
+                <button class="btn-warning" onclick="showToast('warning', 'Warning: Please review your input.')">Warning</button>
+                <button class="btn-error" onclick="showToast('error', 'Error: Something went wrong.')">Error</button>
+                <button class="btn-info" onclick="showToast('info', 'Info: Here is some helpful information.')">Info</button>
+            </div>
+        </div>
+        
+        <!-- Sizes -->
+        <div class="section">
+            <h2>Sizes</h2>
+            <p>Test different toast sizes.</p>
+            <div class="button-group">
+                <button class="btn-info" onclick="showToast('info', 'Small toast message', 'small')">Small</button>
+                <button class="btn-info" onclick="showToast('info', 'Medium toast message with more content', 'medium')">Medium</button>
+                <button class="btn-info" onclick="showToast('info', 'Large toast message with even more content to demonstrate the full size', 'large')">Large</button>
+            </div>
+        </div>
+        
+        <!-- Positions -->
+        <div class="section">
+            <h2>Positions</h2>
+            <p>Test different toast positions on screen.</p>
+            <div class="button-group">
+                <button class="btn-info" onclick="showToast('info', 'Top positioned toast', 'medium', 'top')">Top</button>
+                <button class="btn-info" onclick="showToast('info', 'Bottom positioned toast', 'medium', 'bottom')">Bottom</button>
+                <button class="btn-info" onclick="showToast('info', 'Left positioned toast', 'medium', 'left')">Left</button>
+                <button class="btn-info" onclick="showToast('info', 'Right positioned toast', 'medium', 'right')">Right</button>
+            </div>
+        </div>
+        
+        <!-- Auto-dismiss -->
+        <div class="section">
+            <h2>Auto-dismiss</h2>
+            <p>Test auto-dismiss functionality with different delays.</p>
+            <div class="button-group">
+                <button class="btn-success" onclick="showAutoDismissToast('success', 'Auto-dismiss in 2 seconds', 2000)">2s Auto-dismiss</button>
+                <button class="btn-warning" onclick="showAutoDismissToast('warning', 'Auto-dismiss in 5 seconds', 5000)">5s Auto-dismiss</button>
+                <button class="btn-error" onclick="showAutoDismissToast('error', 'Auto-dismiss in 8 seconds', 8000)">8s Auto-dismiss</button>
+            </div>
+        </div>
+        
+        <!-- Dismissible -->
+        <div class="section">
+            <h2>Dismissible</h2>
+            <p>Test dismissible and non-dismissible toasts.</p>
+            <div class="button-group">
+                <button class="btn-info" onclick="showDismissibleToast(true)">Dismissible Toast</button>
+                <button class="btn-info" onclick="showDismissibleToast(false)">Non-dismissible Toast</button>
+            </div>
+        </div>
+        
+        <!-- Interactive Controls -->
+        <div class="section">
+            <h2>Interactive Controls</h2>
+            <p>Customize toast properties and test them.</p>
+            <div class="controls">
+                <div class="control-group">
+                    <label for="variant-select">Variant:</label>
+                    <select id="variant-select">
+                        <option value="default">Default</option>
+                        <option value="success">Success</option>
+                        <option value="warning">Warning</option>
+                        <option value="error">Error</option>
+                        <option value="info">Info</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="size-select">Size:</label>
+                    <select id="size-select">
+                        <option value="small">Small</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="large">Large</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="position-select">Position:</label>
+                    <select id="position-select">
+                        <option value="top" selected>Top</option>
+                        <option value="bottom">Bottom</option>
+                        <option value="left">Left</option>
+                        <option value="right">Right</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="role-select">Role:</label>
+                    <select id="role-select">
+                        <option value="alert" selected>Alert</option>
+                        <option value="alertdialog">Alert Dialog</option>
+                        <option value="status">Status</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="message-input">Message:</label>
+                    <input type="text" id="message-input" value="Custom toast message" placeholder="Enter message">
+                </div>
+                <div class="control-group">
+                    <label for="delay-input">Auto-dismiss Delay (ms):</label>
+                    <input type="number" id="delay-input" value="5000" min="1000" max="30000" step="1000">
+                </div>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="dismissible-check" checked>
+                <label for="dismissible-check">Dismissible</label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="auto-dismiss-check">
+                <label for="auto-dismiss-check">Auto-dismiss</label>
+            </div>
+            <div class="button-group">
+                <button class="btn-info" onclick="showCustomToast()">Show Custom Toast</button>
+                <button class="btn-default" onclick="clearAllToasts()">Clear All Toasts</button>
+            </div>
+        </div>
+        
+        <!-- Accessibility Testing -->
+        <div class="section">
+            <h2>Accessibility Testing</h2>
+            <p>Test accessibility features including keyboard navigation and screen reader support.</p>
+            <div class="button-group">
+                <button class="btn-info" onclick="showAccessibleToast()">Show Accessible Toast</button>
+                <button class="btn-info" onclick="testKeyboardNavigation()">Test Keyboard Navigation</button>
+                <button class="btn-info" onclick="testScreenReader()">Test Screen Reader</button>
+            </div>
+            <div id="accessibility-status"></div>
+        </div>
+        
+        <!-- Performance Testing -->
+        <div class="section">
+            <h2>Performance Testing</h2>
+            <p>Test performance with multiple toasts.</p>
+            <div class="button-group">
+                <button class="btn-info" onclick="showMultipleToasts(5)">Show 5 Toasts</button>
+                <button class="btn-info" onclick="showMultipleToasts(10)">Show 10 Toasts</button>
+                <button class="btn-info" onclick="showMultipleToasts(20)">Show 20 Toasts</button>
+                <button class="btn-default" onclick="clearAllToasts()">Clear All</button>
+            </div>
+            <div id="performance-status"></div>
+        </div>
+        
+        <!-- Event Testing -->
+        <div class="section">
+            <h2>Event Testing</h2>
+            <p>Test component events and their data.</p>
+            <div class="button-group">
+                <button class="btn-info" onclick="testEvents()">Test Events</button>
+                <button class="btn-default" onclick="clearEventLog()">Clear Event Log</button>
+            </div>
+            <div id="event-log" class="code-block" style="max-height: 200px; overflow-y: auto;"></div>
+        </div>
+        
+        <!-- API Testing -->
+        <div class="section">
+            <h2>API Testing</h2>
+            <p>Test public methods and properties.</p>
+            <div class="button-group">
+                <button class="btn-info" onclick="testAPI()">Test API Methods</button>
+                <button class="btn-info" onclick="testPropertyValidation()">Test Property Validation</button>
+            </div>
+            <div id="api-status"></div>
+        </div>
+    </div>
+
+    <!-- Import the design system -->
+    <script type="module" src="./dist/design-system.esm.js"></script>
+    
+    <script>
+        let toastCounter = 0;
+        let eventLog = [];
+        
+        // Basic toast functions
+        function showToast(variant, message, size = 'medium', position = 'top') {
+            const toast = document.createElement('ds-toast');
+            toast.variant = variant;
+            toast.size = size;
+            toast.position = position;
+            toast.textContent = message;
+            toast.dismissible = true;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            // Add event listeners
+            addEventListeners(toast);
+            
+            logEvent('Toast created', { variant, size, position, message });
+        }
+        
+        function showAutoDismissToast(variant, message, delay) {
+            const toast = document.createElement('ds-toast');
+            toast.variant = variant;
+            toast.size = 'medium';
+            toast.position = 'top';
+            toast.textContent = message;
+            toast.dismissible = true;
+            toast.autoDismiss = true;
+            toast.autoDismissDelay = delay;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            addEventListeners(toast);
+            
+            logEvent('Auto-dismiss toast created', { variant, delay, message });
+        }
+        
+        function showDismissibleToast(dismissible) {
+            const toast = document.createElement('ds-toast');
+            toast.variant = dismissible ? 'info' : 'warning';
+            toast.size = 'medium';
+            toast.position = 'top';
+            toast.textContent = dismissible ? 'This toast can be dismissed' : 'This toast cannot be dismissed';
+            toast.dismissible = dismissible;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            addEventListeners(toast);
+            
+            logEvent('Dismissible toast created', { dismissible });
+        }
+        
+        function showCustomToast() {
+            const variant = document.getElementById('variant-select').value;
+            const size = document.getElementById('size-select').value;
+            const position = document.getElementById('position-select').value;
+            const message = document.getElementById('message-input').value;
+            const dismissible = document.getElementById('dismissible-check').checked;
+            const autoDismiss = document.getElementById('auto-dismiss-check').checked;
+            const delay = parseInt(document.getElementById('delay-input').value);
+            const role = document.getElementById('role-select').value;
+            
+            const toast = document.createElement('ds-toast');
+            toast.variant = variant;
+            toast.size = size;
+            toast.position = position;
+            toast.textContent = message;
+            toast.dismissible = dismissible;
+            toast.autoDismiss = autoDismiss;
+            toast.autoDismissDelay = delay;
+            toast.role = role;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            addEventListeners(toast);
+            
+            logEvent('Custom toast created', { variant, size, position, dismissible, autoDismiss, delay, role });
+        }
+        
+        function showAccessibleToast() {
+            const toast = document.createElement('ds-toast');
+            toast.variant = 'success';
+            toast.size = 'medium';
+            toast.position = 'top';
+            toast.textContent = 'Accessible toast with proper ARIA attributes';
+            toast.ariaLabel = 'Success notification';
+            toast.role = 'alert';
+            toast.dismissible = true;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            addEventListeners(toast);
+            
+            // Test focus
+            setTimeout(() => {
+                toast.focus();
+                updateAccessibilityStatus('Toast focused successfully', 'success');
+            }, 100);
+            
+            logEvent('Accessible toast created', { ariaLabel: toast.ariaLabel, role: toast.role });
+        }
+        
+        function testKeyboardNavigation() {
+            const toast = document.createElement('ds-toast');
+            toast.variant = 'info';
+            toast.size = 'medium';
+            toast.position = 'top';
+            toast.textContent = 'Test keyboard navigation - Tab to focus, Enter/Space on dismiss button';
+            toast.dismissible = true;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            addEventListeners(toast);
+            
+            // Test keyboard navigation
+            setTimeout(() => {
+                toast.focus();
+                updateAccessibilityStatus('Toast focused - try Tab, Enter, and Space keys', 'info');
+            }, 100);
+            
+            logEvent('Keyboard navigation test started');
+        }
+        
+        function testScreenReader() {
+            const toast = document.createElement('ds-toast');
+            toast.variant = 'warning';
+            toast.size = 'medium';
+            toast.position = 'top';
+            toast.textContent = 'Screen reader test - should announce toast shown';
+            toast.dismissible = true;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            addEventListeners(toast);
+            
+            updateAccessibilityStatus('Toast created - check screen reader announcements', 'info');
+            
+            // Test dismiss announcement
+            setTimeout(() => {
+                toast.dismiss();
+                updateAccessibilityStatus('Toast dismissed - check screen reader announcements', 'success');
+            }, 2000);
+            
+            logEvent('Screen reader test started');
+        }
+        
+        function showMultipleToasts(count) {
+            const startTime = performance.now();
+            const variants = ['success', 'warning', 'error', 'info'];
+            const positions = ['top', 'bottom', 'left', 'right'];
+            
+            for (let i = 0; i < count; i++) {
+                const toast = document.createElement('ds-toast');
+                toast.variant = variants[i % variants.length];
+                toast.position = positions[i % positions.length];
+                toast.size = 'small';
+                toast.textContent = `Toast ${i + 1}: ${toast.variant} variant`;
+                toast.dismissible = true;
+                toast.autoDismiss = true;
+                toast.autoDismissDelay = 3000 + (i * 500);
+                
+                document.body.appendChild(toast);
+                addEventListeners(toast);
+            }
+            
+            const endTime = performance.now();
+            const duration = endTime - startTime;
+            
+            updatePerformanceStatus(`Created ${count} toasts in ${duration.toFixed(2)}ms`, 'success');
+            logEvent('Multiple toasts created', { count, duration });
+        }
+        
+        function testEvents() {
+            const toast = document.createElement('ds-toast');
+            toast.variant = 'info';
+            toast.size = 'medium';
+            toast.position = 'top';
+            toast.textContent = 'Event testing toast';
+            toast.dismissible = true;
+            toast.autoDismiss = true;
+            toast.autoDismissDelay = 5000;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            addEventListeners(toast);
+            
+            // Test all events
+            setTimeout(() => {
+                toast.focus();
+                logEvent('Focus event triggered');
+            }, 100);
+            
+            setTimeout(() => {
+                toast.blur();
+                logEvent('Blur event triggered');
+            }, 200);
+            
+            setTimeout(() => {
+                toast.dismiss();
+                logEvent('Dismiss event triggered');
+            }, 300);
+            
+            logEvent('Event testing started');
+        }
+        
+        function testAPI() {
+            const toast = document.createElement('ds-toast');
+            toast.variant = 'success';
+            toast.size = 'large';
+            toast.position = 'bottom';
+            toast.textContent = 'API testing toast';
+            toast.dismissible = true;
+            toast.autoDismiss = true;
+            toast.autoDismissDelay = 10000;
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            // Test API methods
+            const results = {
+                isVisible: toast.isVisible(),
+                isDismissible: toast.isDismissible(),
+                hasAutoDismiss: toast.hasAutoDismiss(),
+                getPosition: toast.getPosition(),
+                getAutoDismissDelay: toast.getAutoDismissDelay(),
+                getTextContent: toast.getTextContent(),
+                getDimensions: toast.getDimensions()
+            };
+            
+            updateAPIStatus('API methods tested successfully', 'success');
+            logEvent('API test results', results);
+            
+            // Test property setting
+            toast.setAutoDismissDelay(3000);
+            logEvent('setAutoDismissDelay called', { newDelay: toast.getAutoDismissDelay() });
+        }
+        
+        function testPropertyValidation() {
+            const toast = document.createElement('ds-toast');
+            
+            // Test invalid values
+            toast.variant = 'invalid';
+            toast.size = 'invalid';
+            toast.position = 'invalid';
+            toast.role = 'invalid';
+            toast.autoDismissDelay = 500; // Below minimum
+            
+            document.body.appendChild(toast);
+            toastCounter++;
+            
+            // Check if values were corrected
+            const results = {
+                variant: toast.variant,
+                size: toast.size,
+                position: toast.position,
+                role: toast.role,
+                autoDismissDelay: toast.autoDismissDelay
+            };
+            
+            updateAPIStatus('Property validation tested', 'info');
+            logEvent('Property validation results', results);
+        }
+        
+        function clearAllToasts() {
+            const toasts = document.querySelectorAll('ds-toast');
+            toasts.forEach(toast => {
+                if (toast.dismiss) {
+                    toast.dismiss();
+                } else {
+                    toast.remove();
+                }
+            });
+            toastCounter = 0;
+            logEvent('All toasts cleared');
+        }
+        
+        function addEventListeners(toast) {
+            toast.addEventListener('ds-toast-render', (e) => {
+                logEvent('ds-toast-render', e.detail.data);
+            });
+            
+            toast.addEventListener('ds-toast-focus', (e) => {
+                logEvent('ds-toast-focus', e.detail.data);
+            });
+            
+            toast.addEventListener('ds-toast-blur', (e) => {
+                logEvent('ds-toast-blur', e.detail.data);
+            });
+            
+            toast.addEventListener('ds-toast-dismiss', (e) => {
+                logEvent('ds-toast-dismiss', e.detail.data);
+            });
+        }
+        
+        function logEvent(type, data = {}) {
+            const timestamp = new Date().toLocaleTimeString();
+            const event = { timestamp, type, data };
+            eventLog.push(event);
+            
+            const eventLogElement = document.getElementById('event-log');
+            if (eventLogElement) {
+                eventLogElement.innerHTML = eventLog.map(e => 
+                    `[${e.timestamp}] ${e.type}: ${JSON.stringify(e.data, null, 2)}`
+                ).join('\n\n');
+                eventLogElement.scrollTop = eventLogElement.scrollHeight;
+            }
+        }
+        
+        function clearEventLog() {
+            eventLog = [];
+            document.getElementById('event-log').innerHTML = '';
+        }
+        
+        function updateAccessibilityStatus(message, type) {
+            const statusElement = document.getElementById('accessibility-status');
+            statusElement.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        function updatePerformanceStatus(message, type) {
+            const statusElement = document.getElementById('performance-status');
+            statusElement.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        function updateAPIStatus(message, type) {
+            const statusElement = document.getElementById('api-status');
+            statusElement.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            logEvent('Toast component test page loaded');
+            updateAccessibilityStatus('Ready for accessibility testing', 'info');
+            updatePerformanceStatus('Ready for performance testing', 'info');
+            updateAPIStatus('Ready for API testing', 'info');
+        });
+    </script>
+</body>
+</html>

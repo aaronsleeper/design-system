@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Component Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background-color: #f5f5f5;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #555;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 0.5rem;
+    }
+
+    .section {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    select, input {
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    .event-log {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-top: 1rem;
+      max-height: 200px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .event-item {
+      margin-bottom: 0.5rem;
+      padding: 0.25rem;
+      background: white;
+      border-radius: 2px;
+    }
+
+    .event-time {
+      color: #666;
+      font-size: 10px;
+    }
+
+    .event-detail {
+      color: #333;
+    }
+
+    .test-info {
+      background: #e7f3ff;
+      border: 1px solid #b3d9ff;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .test-info h3 {
+      margin-top: 0;
+      color: #0066cc;
+    }
+
+    .card-content {
+      padding: 1rem;
+    }
+
+    .card-header {
+      margin-bottom: 1rem;
+    }
+
+    .card-body {
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .card-actions button {
+      padding: 0.25rem 0.5rem;
+      font-size: 12px;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .status-success { background: #28a745; }
+    .status-error { background: #dc3545; }
+    .status-warning { background: #ffc107; }
+    .status-info { background: #17a2b8; }
+
+    @media (max-width: 768px) {
+      .grid, .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+      }
+      
+      .controls {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Card Component Test Page</h1>
+    
+    <div class="test-info">
+      <h3>Test Instructions</h3>
+      <p>This page provides comprehensive testing for the Card component. Use the controls below to test different variants, sizes, colors, and states. Monitor the event log to see component events being fired.</p>
+    </div>
+
+    <!-- Interactive Controls -->
+    <div class="section">
+      <h2>Interactive Controls</h2>
+      <div class="controls">
+        <div class="control-group">
+          <label for="variant">Variant:</label>
+          <select id="variant">
+            <option value="default">Default</option>
+            <option value="elevated">Elevated</option>
+            <option value="outlined">Outlined</option>
+            <option value="filled">Filled</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label for="size">Size:</label>
+          <select id="size">
+            <option value="small">Small</option>
+            <option value="medium" selected>Medium</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label for="color">Color:</label>
+          <select id="color">
+            <option value="neutral" selected>Neutral</option>
+            <option value="primary">Primary</option>
+            <option value="secondary">Secondary</option>
+            <option value="inverse">Inverse</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label for="state">State:</label>
+          <select id="state">
+            <option value="default" selected>Default</option>
+            <option value="hover">Hover</option>
+            <option value="focus">Focus</option>
+            <option value="disabled">Disabled</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>
+            <input type="checkbox" id="clickable"> Clickable
+          </label>
+        </div>
+        
+        <div class="control-group">
+          <label for="href">Href (for link cards):</label>
+          <input type="text" id="href" placeholder="https://example.com">
+        </div>
+        
+        <div class="control-group">
+          <label for="target">Target:</label>
+          <select id="target">
+            <option value="_self" selected>_self</option>
+            <option value="_blank">_blank</option>
+            <option value="_parent">_parent</option>
+            <option value="_top">_top</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <button onclick="updateTestCard()">Update Test Card</button>
+        </div>
+      </div>
+      
+      <div id="test-card-container">
+        <ds-card id="test-card" variant="default" size="medium" color="neutral">
+          <div class="card-header">
+            <h3>Test Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a test card. Use the controls above to modify its properties.</p>
+          </div>
+          <div class="card-footer">
+            <div class="card-actions">
+              <button>Action 1</button>
+              <button>Action 2</button>
+            </div>
+          </div>
+        </ds-card>
+      </div>
+      
+      <div class="event-log" id="event-log">
+        <div class="event-item">
+          <div class="event-time">Ready</div>
+          <div class="event-detail">Card component test page loaded</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Variants -->
+    <div class="section">
+      <h2>Card Variants</h2>
+      <div class="grid-2">
+        <ds-card variant="default">
+          <div class="card-header">
+            <h3>Default Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a default card with a simple border.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card variant="elevated">
+          <div class="card-header">
+            <h3>Elevated Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is an elevated card with shadow effects.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card variant="outlined">
+          <div class="card-header">
+            <h3>Outlined Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is an outlined card with a prominent border.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card variant="filled">
+          <div class="card-header">
+            <h3>Filled Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a filled card with background color.</p>
+          </div>
+        </ds-card>
+      </div>
+    </div>
+
+    <!-- Sizes -->
+    <div class="section">
+      <h2>Card Sizes</h2>
+      <div class="grid-3">
+        <ds-card size="small">
+          <div class="card-header">
+            <h4>Small Card</h4>
+          </div>
+          <div class="card-body">
+            <p>This is a small card with compact padding.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card size="medium">
+          <div class="card-header">
+            <h3>Medium Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a medium card with standard padding.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card size="large">
+          <div class="card-header">
+            <h2>Large Card</h2>
+          </div>
+          <div class="card-body">
+            <p>This is a large card with generous padding.</p>
+          </div>
+        </ds-card>
+      </div>
+    </div>
+
+    <!-- Colors -->
+    <div class="section">
+      <h2>Card Colors</h2>
+      <div class="grid-2">
+        <ds-card color="primary" variant="elevated">
+          <div class="card-header">
+            <h3>Primary Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a primary colored card.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card color="secondary" variant="elevated">
+          <div class="card-header">
+            <h3>Secondary Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a secondary colored card.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card color="neutral" variant="elevated">
+          <div class="card-header">
+            <h3>Neutral Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is a neutral colored card.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card color="inverse" variant="elevated">
+          <div class="card-header">
+            <h3>Inverse Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This is an inverse colored card.</p>
+          </div>
+        </ds-card>
+      </div>
+    </div>
+
+    <!-- Interactive Cards -->
+    <div class="section">
+      <h2>Interactive Cards</h2>
+      <div class="grid-2">
+        <ds-card clickable>
+          <div class="card-header">
+            <h3>Clickable Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This card is clickable and will show hover effects.</p>
+          </div>
+          <div class="card-footer">
+            <small>Click me!</small>
+          </div>
+        </ds-card>
+        
+        <ds-card href="https://example.com" target="_blank">
+          <div class="card-header">
+            <h3>Link Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This card is a link that opens in a new tab.</p>
+          </div>
+          <div class="card-footer">
+            <small>External link</small>
+          </div>
+        </ds-card>
+        
+        <ds-card state="disabled">
+          <div class="card-header">
+            <h3>Disabled Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This card is disabled and cannot be interacted with.</p>
+          </div>
+        </ds-card>
+        
+        <ds-card clickable aria-pressed="false">
+          <div class="card-header">
+            <h3>Toggle Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This card can be toggled on and off.</p>
+          </div>
+        </ds-card>
+      </div>
+    </div>
+
+    <!-- Complex Content -->
+    <div class="section">
+      <h2>Complex Content</h2>
+      <div class="grid-2">
+        <ds-card variant="elevated" size="large">
+          <img 
+            class="card__media" 
+            src="https://via.placeholder.com/300x200/4F46E5/FFFFFF?text=Product+Image" 
+            alt="Product image"
+            style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0;"
+          >
+          <div class="card-header">
+            <h3>Product Card</h3>
+            <p style="color: #666; margin: 0;">Electronics</p>
+          </div>
+          <div class="card-body">
+            <p>This is a product card with an image, header, body, and action buttons.</p>
+            <ul>
+              <li>High quality</li>
+              <li>Durable</li>
+              <li>Warranty included</li>
+            </ul>
+          </div>
+          <div class="card-footer">
+            <div class="card-actions">
+              <button>Add to Cart</button>
+              <button>View Details</button>
+            </div>
+          </div>
+        </ds-card>
+        
+        <ds-card variant="outlined" color="primary">
+          <div class="card-header">
+            <h3>Article Card</h3>
+            <p style="color: #666; margin: 0; font-size: 0.875rem;">
+              Published on March 15, 2024
+            </p>
+          </div>
+          <div class="card-body">
+            <p>This is an article card with metadata, content preview, and social actions.</p>
+            <blockquote style="border-left: 3px solid #4F46E5; padding-left: 1rem; margin: 1rem 0; font-style: italic;">
+              "A great quote from the article that provides insight into the content."
+            </blockquote>
+          </div>
+          <div class="card-footer">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.875rem; color: #666;">
+                By Author Name
+              </span>
+              <div class="card-actions">
+                <button>Like</button>
+                <button>Share</button>
+              </div>
+            </div>
+          </div>
+        </ds-card>
+      </div>
+    </div>
+
+    <!-- Accessibility Test -->
+    <div class="section">
+      <h2>Accessibility Test</h2>
+      <div class="grid">
+        <ds-card 
+          clickable 
+          aria-label="Product card for wireless headphones"
+          aria-describedby="headphone-description"
+        >
+          <div class="card-header">
+            <h3>Wireless Headphones</h3>
+          </div>
+          <div class="card-body">
+            <p id="headphone-description">
+              High-quality wireless headphones with noise cancellation and 30-hour battery life.
+            </p>
+          </div>
+          <div class="card-footer">
+            <strong>$199.99</strong>
+          </div>
+        </ds-card>
+        
+        <ds-card 
+          clickable 
+          aria-expanded="false"
+          aria-controls="expandable-content"
+        >
+          <div class="card-header">
+            <h3>Expandable Card</h3>
+          </div>
+          <div class="card-body">
+            <p>This card can be expanded to show more content.</p>
+            <div id="expandable-content" style="display: none;">
+              <p>Additional content that can be shown or hidden.</p>
+            </div>
+          </div>
+        </ds-card>
+      </div>
+    </div>
+
+    <!-- Performance Test -->
+    <div class="section">
+      <h2>Performance Test</h2>
+      <div class="controls">
+        <button onclick="createManyCards()">Create 100 Cards</button>
+        <button onclick="clearPerformanceTest()">Clear Cards</button>
+      </div>
+      <div id="performance-test-container"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { Card } from './dist/components/content/card.js';
+    
+    // Register the component
+    customElements.define('ds-card', Card);
+    
+    // Event logging
+    const eventLog = document.getElementById('event-log');
+    
+    function logEvent(eventName, detail) {
+      const eventItem = document.createElement('div');
+      eventItem.className = 'event-item';
+      
+      const time = new Date().toLocaleTimeString();
+      const eventDetail = JSON.stringify(detail, null, 2);
+      
+      eventItem.innerHTML = `
+        <div class="event-time">${time}</div>
+        <div class="event-detail"><strong>${eventName}:</strong> ${eventDetail}</div>
+      `;
+      
+      eventLog.appendChild(eventItem);
+      eventLog.scrollTop = eventLog.scrollHeight;
+    }
+    
+    // Add event listeners to all cards
+    document.addEventListener('ds-card-click', (e) => {
+      logEvent('ds-card-click', e.detail);
+    });
+    
+    document.addEventListener('ds-card-focus', (e) => {
+      logEvent('ds-card-focus', e.detail);
+    });
+    
+    document.addEventListener('ds-card-blur', (e) => {
+      logEvent('ds-card-blur', e.detail);
+    });
+    
+    // Update test card function
+    window.updateTestCard = function() {
+      const testCard = document.getElementById('test-card');
+      const variant = document.getElementById('variant').value;
+      const size = document.getElementById('size').value;
+      const color = document.getElementById('color').value;
+      const state = document.getElementById('state').value;
+      const clickable = document.getElementById('clickable').checked;
+      const href = document.getElementById('href').value;
+      const target = document.getElementById('target').value;
+      
+      testCard.variant = variant;
+      testCard.size = size;
+      testCard.color = color;
+      testCard.state = state;
+      testCard.clickable = clickable;
+      testCard.href = href || undefined;
+      testCard.target = target;
+      
+      logEvent('test-card-updated', {
+        variant, size, color, state, clickable, href, target
+      });
+    };
+    
+    // Performance test functions
+    window.createManyCards = function() {
+      const container = document.getElementById('performance-test-container');
+      const startTime = performance.now();
+      
+      for (let i = 0; i < 100; i++) {
+        const card = document.createElement('ds-card');
+        card.variant = 'elevated';
+        card.size = 'small';
+        card.innerHTML = `
+          <div class="card-header">
+            <h4>Card ${i + 1}</h4>
+          </div>
+          <div class="card-body">
+            <p>This is card number ${i + 1} for performance testing.</p>
+          </div>
+        `;
+        container.appendChild(card);
+      }
+      
+      const endTime = performance.now();
+      const duration = endTime - startTime;
+      
+      logEvent('performance-test', {
+        action: 'create-100-cards',
+        duration: `${duration.toFixed(2)}ms`,
+        cardsPerSecond: Math.round(100 / (duration / 1000))
+      });
+    };
+    
+    window.clearPerformanceTest = function() {
+      const container = document.getElementById('performance-test-container');
+      container.innerHTML = '';
+      logEvent('performance-test', { action: 'clear-cards' });
+    };
+    
+    // Initial log
+    logEvent('page-loaded', { timestamp: Date.now() });
+  </script>
+</body>
+</html>

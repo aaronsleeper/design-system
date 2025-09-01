@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Component Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8fafc;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #1f2937;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #374151;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .radio-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .form-example {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+        }
+        
+        fieldset {
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        
+        legend {
+            font-weight: 600;
+            padding: 0 8px;
+        }
+        
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 8px 4px;
+        }
+        
+        button:hover {
+            background: #2563eb;
+        }
+        
+        .output {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 12px 0;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .status {
+            padding: 8px 12px;
+            border-radius: 4px;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        
+        .status.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .status.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        
+        .status.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #93c5fd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Radio Component Test Page</h1>
+        
+        <!-- Basic Examples -->
+        <div class="test-section">
+            <h2>Basic Examples</h2>
+            <div class="radio-group">
+                <ds-radio>Default Radio</ds-radio>
+                <ds-radio checked>Checked Radio</ds-radio>
+                <ds-radio disabled>Disabled Radio</ds-radio>
+                <ds-radio checked disabled>Disabled Checked Radio</ds-radio>
+            </div>
+        </div>
+        
+        <!-- Size Variants -->
+        <div class="test-section">
+            <h2>Size Variants</h2>
+            <div class="radio-group">
+                <ds-radio size="small">Small Radio</ds-radio>
+                <ds-radio size="medium">Medium Radio</ds-radio>
+                <ds-radio size="large">Large Radio</ds-radio>
+            </div>
+        </div>
+        
+        <!-- Validation States -->
+        <div class="test-section">
+            <h2>Validation States</h2>
+            <div class="radio-group">
+                <ds-radio validation-state="default">Default State</ds-radio>
+                <ds-radio validation-state="error" error-message="This field is required">Error State</ds-radio>
+                <ds-radio validation-state="success" success-message="Selection confirmed">Success State</ds-radio>
+                <ds-radio validation-state="warning" warning-message="Please review your selection">Warning State</ds-radio>
+            </div>
+        </div>
+        
+        <!-- Required States -->
+        <div class="test-section">
+            <h2>Required States</h2>
+            <div class="radio-group">
+                <ds-radio>Optional Radio</ds-radio>
+                <ds-radio required>Required Radio</ds-radio>
+                <ds-radio required checked>Required Checked Radio</ds-radio>
+            </div>
+        </div>
+        
+        <!-- Radio Groups -->
+        <div class="test-section">
+            <h2>Radio Groups</h2>
+            <div class="form-example">
+                <fieldset>
+                    <legend>Choose your preferred option:</legend>
+                    <div class="radio-group">
+                        <ds-radio name="preference" value="option1">Option 1</ds-radio>
+                        <ds-radio name="preference" value="option2" checked>Option 2 (Default)</ds-radio>
+                        <ds-radio name="preference" value="option3">Option 3</ds-radio>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Select your plan:</legend>
+                    <div class="radio-group">
+                        <ds-radio name="plan" value="basic">Basic Plan - $9/month</ds-radio>
+                        <ds-radio name="plan" value="pro" checked>Pro Plan - $19/month</ds-radio>
+                        <ds-radio name="plan" value="enterprise">Enterprise Plan - $49/month</ds-radio>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        
+        <!-- Interactive Controls -->
+        <div class="test-section">
+            <h2>Interactive Controls</h2>
+            <div class="radio-group">
+                <ds-radio id="interactive-1" name="interactive" value="1">Interactive Option 1</ds-radio>
+                <ds-radio id="interactive-2" name="interactive" value="2">Interactive Option 2</ds-radio>
+                <ds-radio id="interactive-3" name="interactive" value="3">Interactive Option 3</ds-radio>
+            </div>
+            
+            <div>
+                <button onclick="selectAll()">Select All</button>
+                <button onclick="deselectAll()">Deselect All</button>
+                <button onclick="toggleDisabled()">Toggle Disabled</button>
+                <button onclick="clearOutput()">Clear Output</button>
+            </div>
+        </div>
+        
+        <!-- Event Output -->
+        <div class="test-section">
+            <h2>Event Output</h2>
+            <div id="output" class="output">Events will appear here...</div>
+        </div>
+        
+        <!-- Accessibility Test -->
+        <div class="test-section">
+            <h2>Accessibility Test</h2>
+            <div class="radio-group">
+                <ds-radio 
+                    aria-label="Accessible option 1"
+                    name="accessible"
+                    value="1"
+                >
+                    Option with aria-label
+                </ds-radio>
+                <ds-radio 
+                    name="accessible"
+                    value="2"
+                    aria-describedby="description"
+                >
+                    Option with description
+                </ds-radio>
+                <div id="description" style="font-size: 0.875rem; color: #666; margin-top: -8px;">
+                    This option has additional context provided via aria-describedby.
+                </div>
+                <ds-radio 
+                    name="accessible"
+                    value="3"
+                    required
+                    validation-state="error"
+                    error-message="This field is required"
+                >
+                    Required option with validation
+                </ds-radio>
+            </div>
+        </div>
+        
+        <!-- Form Integration -->
+        <div class="test-section">
+            <h2>Form Integration</h2>
+            <form id="test-form" class="form-example">
+                <fieldset>
+                    <legend>Contact Information</legend>
+                    <div class="radio-group">
+                        <ds-radio name="contact-method" value="email" checked>Email</ds-radio>
+                        <ds-radio name="contact-method" value="phone">Phone</ds-radio>
+                        <ds-radio name="contact-method" value="mail">Mail</ds-radio>
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Newsletter Frequency</legend>
+                    <div class="radio-group">
+                        <ds-radio name="frequency" value="daily">Daily</ds-radio>
+                        <ds-radio name="frequency" value="weekly" checked>Weekly</ds-radio>
+                        <ds-radio name="frequency" value="monthly">Monthly</ds-radio>
+                        <ds-radio name="frequency" value="never">Never</ds-radio>
+                    </div>
+                </fieldset>
+                
+                <button type="submit">Submit Form</button>
+                <button type="button" onclick="resetForm()">Reset Form</button>
+            </form>
+        </div>
+        
+        <!-- Status Display -->
+        <div class="test-section">
+            <h2>Component Status</h2>
+            <div id="status" class="status info">
+                Radio component loaded successfully. All features are available for testing.
+            </div>
+        </div>
+    </div>
+
+    <!-- Import the design system -->
+    <script type="module" src="./dist/design-system.esm.js"></script>
+    
+    <script>
+        let outputElement = document.getElementById('output');
+        let statusElement = document.getElementById('status');
+        
+        // Event logging
+        function logEvent(event) {
+            const timestamp = new Date().toLocaleTimeString();
+            const eventInfo = {
+                type: event.type,
+                component: event.detail?.component || 'unknown',
+                data: event.detail?.data || {},
+                timestamp: timestamp
+            };
+            
+            const logEntry = `[${timestamp}] ${event.type}\n${JSON.stringify(eventInfo, null, 2)}\n\n`;
+            outputElement.textContent += logEntry;
+            outputElement.scrollTop = outputElement.scrollHeight;
+        }
+        
+        // Add event listeners to all radio components
+        document.addEventListener('ds-radio-change', logEvent);
+        document.addEventListener('ds-radio-focus', logEvent);
+        document.addEventListener('ds-radio-blur', logEvent);
+        document.addEventListener('ds-radio-validate', logEvent);
+        
+        // Interactive functions
+        function selectAll() {
+            const radios = document.querySelectorAll('ds-radio[name="interactive"]');
+            radios.forEach(radio => {
+                radio.select();
+            });
+            updateStatus('All interactive radios selected', 'success');
+        }
+        
+        function deselectAll() {
+            const radios = document.querySelectorAll('ds-radio[name="interactive"]');
+            radios.forEach(radio => {
+                radio.deselect();
+            });
+            updateStatus('All interactive radios deselected', 'success');
+        }
+        
+        function toggleDisabled() {
+            const radios = document.querySelectorAll('ds-radio[name="interactive"]');
+            const isDisabled = radios[0].disabled;
+            radios.forEach(radio => {
+                radio.disabled = !isDisabled;
+            });
+            updateStatus(`Interactive radios ${isDisabled ? 'enabled' : 'disabled'}`, 'info');
+        }
+        
+        function clearOutput() {
+            outputElement.textContent = 'Events will appear here...\n';
+            updateStatus('Event output cleared', 'info');
+        }
+        
+        function resetForm() {
+            document.getElementById('test-form').reset();
+            const radios = document.querySelectorAll('#test-form ds-radio');
+            radios.forEach(radio => {
+                radio.checked = false;
+            });
+            updateStatus('Form reset successfully', 'success');
+        }
+        
+        function updateStatus(message, type) {
+            statusElement.textContent = message;
+            statusElement.className = `status ${type}`;
+        }
+        
+        // Form submission handler
+        document.getElementById('test-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData.entries());
+            updateStatus(`Form submitted with data: ${JSON.stringify(data)}`, 'success');
+        });
+        
+        // Keyboard navigation test
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                const activeElement = document.activeElement;
+                if (activeElement && activeElement.tagName === 'DS-RADIO') {
+                    logEvent({
+                        type: 'keyboard-navigation',
+                        detail: {
+                            component: 'radio',
+                            data: { key: e.key, element: activeElement.id || 'unnamed' }
+                        }
+                    });
+                }
+            }
+        });
+        
+        // Component initialization check
+        document.addEventListener('DOMContentLoaded', function() {
+            const radios = document.querySelectorAll('ds-radio');
+            if (radios.length > 0) {
+                updateStatus(`Radio component loaded successfully. Found ${radios.length} radio elements.`, 'success');
+            } else {
+                updateStatus('Radio component failed to load or no radio elements found.', 'error');
+            }
+        });
+        
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            const loadTime = performance.now();
+            updateStatus(`Page loaded in ${Math.round(loadTime)}ms`, 'info');
+        });
+    </script>
+</body>
+</html>
